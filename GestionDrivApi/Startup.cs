@@ -1,3 +1,4 @@
+using GestionDrivApi.ConfigExtension;
 using GestionDrivApi.Data;
 using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories;
@@ -35,6 +36,8 @@ namespace GestionDrivApi
         {
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCustomUserInjectionService();
 
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ApplicationContext")));

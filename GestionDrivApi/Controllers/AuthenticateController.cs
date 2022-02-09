@@ -10,25 +10,30 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Http;
+using GestionDrivApi.Repositories;
 
 namespace authentication.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("user/[controller]")]
     public class AuthenticateController : ControllerBase
     {
         private readonly UserManager<Personne> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private UserRepository _userRepo;
 
         public AuthenticateController(
             UserManager<Personne> userManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            UserRepository userRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userRepo = userRepository;
+
         }
 
         [HttpPost]
@@ -147,6 +152,14 @@ namespace authentication.Controllers
             await _userManager.AddToRoleAsync(user, "Employee");
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+        
+        [HttpGet]
+        [Route("findall")]
+        public async Task<List<Personne>> Findall()
+        {
+            //List<Personne> personnes = (List <Personne>) _userManager.Users.GetEnumerator();
+            return await _userRepo.Findall();
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
