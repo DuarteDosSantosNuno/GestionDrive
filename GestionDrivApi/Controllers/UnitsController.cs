@@ -48,10 +48,26 @@ namespace GestionDrivApi.Controllers
                  }
              }*/
 
-        [HttpGet]
+        /*[HttpGet]
         public List<Unit> FindAll()
         {
             return _unitRepository.FindAll();
+        }*/
+
+        [HttpGet("")]
+        public IActionResult FindAll()
+        {
+            _logger.LogDebug("Appel reçu de AdressesController.FindAll");
+            List<Unit> list = _unitRepository.FindAll();
+            _logger.LogDebug(list.ToString());
+            if (list != null)
+            {
+                return Ok(list);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
 
