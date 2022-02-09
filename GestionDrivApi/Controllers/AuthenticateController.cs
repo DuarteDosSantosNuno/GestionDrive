@@ -64,32 +64,6 @@ namespace authentication.Controllers
 
         [HttpPost]
         [Route("register")]
-        //public async Task<IActionResult> Register([FromBody] RegisterModel model)
-        //{
-        //    var userExists = await _userManager.FindByEmailAsync(model.Email);
-
-        //    if (userExists != null)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-        //    }
-
-        //    IdentityUser user = new()
-        //    {
-        //        Email = model.Email,
-        //        SecurityStamp = Guid.NewGuid().ToString(),
-        //        UserName = model.Email
-        //    };
-
-        //    var result = await _userManager.CreateAsync(user, model.Password);
-
-        //    if (!result.Succeeded)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-        //    }
-
-        //    return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-        //}
-
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             Personne userExists = await _userManager.FindByEmailAsync(model.Email);
@@ -112,6 +86,8 @@ namespace authentication.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
             }
+
+            await _userManager.AddToRoleAsync(user, "Client");
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
@@ -140,8 +116,35 @@ namespace authentication.Controllers
             }
 
             await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, "Employee");
 
-            await _userManager.AddToRoleAsync(user, "User");
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+        [HttpPost]
+        [Route("register-employee")]
+        public async Task<IActionResult> RegisterEmployee([FromBody] RegisterModel model)
+        {
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
+
+            if (userExists != null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+            }
+
+            Personne user = new()
+            {
+                Email = model.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = model.Email
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+            }
+
+            await _userManager.AddToRoleAsync(user, "Employee");
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }

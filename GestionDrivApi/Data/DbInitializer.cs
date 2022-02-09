@@ -12,7 +12,7 @@ namespace GestionDrivApi.Data
             ApplicationContext context,
             RoleManager<IdentityRole> roleManager)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             Rayon r1, r2, r3, r4;
@@ -33,7 +33,8 @@ namespace GestionDrivApi.Data
 
             if (!roleManager.Roles.Any())
             {
-                IdentityRole user = new IdentityRole("User");
+                IdentityRole user = new IdentityRole("Client");
+                IdentityRole employee = new IdentityRole("Employee");
                 IdentityRole admin = new IdentityRole("Admin");
 
                 //await context.Cerfas.AddRangeAsync(mesCerfas);
