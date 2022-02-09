@@ -2,7 +2,7 @@
 
 namespace GestionDrivApi.Entities
 {
-    [Table("Rayon")]
+    [Table("Rayons")]
     public class Rayon
     {
         public int Id { get; set; } 
