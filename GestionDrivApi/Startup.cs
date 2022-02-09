@@ -1,11 +1,16 @@
+using GestionDrivApi.Data;
+using GestionDrivApi.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +31,43 @@ namespace GestionDrivApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<ApplicationContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ApplicationContext")));
+            services.AddLogging();
+
+            services.AddTransient<RayonRepository, RayonRepository>();
+
+            services.AddAuthentication(options => {
+
+
+
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //ou lieu de "Bearer"
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+
+
+            }).AddJwtBearer(options => {
+
+
+
+                string maCle = "cestuneclequejevaisutiliserpourcryptermontoken";
+
+
+
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(maCle)),
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateActor = true,
+                    ValidateLifetime = true
+                };
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -48,7 +90,11 @@ namespace GestionDrivApi
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
+
 
             app.UseEndpoints(endpoints =>
             {
