@@ -17,25 +17,27 @@ export default function Modal() {
 
   return (
     <>
-      <MDBBtn onClick={toggleShow}>LAUNCH DEMO MODAL</MDBBtn>
+      <MDBBtn onClick={toggleShow}>Checkout</MDBBtn>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
         <MDBModalDialog>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Modal title</MDBModalTitle>
+              <MDBModalTitle>Ready to Check out?</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
                 onClick={toggleShow}
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>...</MDBModalBody>
+            <MDBModalBody>
+              OK to proceed to checkout, cancel to go back to your cart
+            </MDBModalBody>
 
             <MDBModalFooter>
               <MDBBtn color="secondary" onClick={toggleShow}>
-                Close
+                Cancel
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
+              <MDBBtn>OK</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

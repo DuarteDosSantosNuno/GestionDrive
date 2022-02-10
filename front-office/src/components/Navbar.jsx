@@ -34,15 +34,12 @@ export default function Navbar() {
           <MDBCollapse navbar show={showNavNoTogglerThird}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
-                <MDBNavbarLink active aria-current="page" href="#">
+                <MDBNavbarLink active aria-current="page" href="/">
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="#">Link</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href="#">
+                <MDBNavbarLink href="/Cart">
                   <MDBBadge pill color="danger">
                     !
                   </MDBBadge>
@@ -50,6 +47,9 @@ export default function Navbar() {
                     <MDBIcon fas icon="shopping-cart"></MDBIcon>
                   </span>
                 </MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/Checkout">Checkout</MDBNavbarLink>
               </MDBNavbarItem>
 
               <MDBNavbarItem>
