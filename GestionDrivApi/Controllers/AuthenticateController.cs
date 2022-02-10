@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Http;
 using GestionDrivApi.Repositories;
+using System.Linq;
 
 namespace authentication.Controllers
 {
@@ -158,8 +159,20 @@ namespace authentication.Controllers
         [Route("findall")]
         public async Task<List<Personne>> Findall()
         {
-            //List<Personne> personnes = (List <Personne>) _userManager.Users.GetEnumerator();
             return await _userRepo.Findall();
+        }
+
+        [HttpPut]
+        [Route("modify")]
+        public async Task<IActionResult> Modify(Personne user)
+        {
+            var success = await _userRepo.Modify(user);
+
+            if (!success.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User modification failed!" });
+            }
+            return Ok(new Response { Status = "Success", Message = "User modified successfully!" });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
