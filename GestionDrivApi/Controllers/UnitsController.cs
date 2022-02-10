@@ -10,26 +10,29 @@ using Microsoft.AspNetCore.Authorization;
 
 
 
+
 namespace GestionDrivApi.Controllers
 {
-  //  [ApiController]
+  
     [Route("api/v1/[controller]")]
+    [ApiController]
     public class UnitsController : ControllerBase
     {
         private readonly ILogger<UnitsController> _logger;
 
-        private UnitRepository _unitRepository;
+        private IUnitRepository _unitRepository;
 
+ 
         public UnitsController(ILogger<UnitsController> logger, IUnitRepository unitRepository)
         {
             _logger = logger;
             _unitRepository = (UnitRepository)unitRepository;          
         }
 
-        public UnitRepository Get_unitRepository()
+        /*public UnitRepository Get_unitRepository()
         {
             return _unitRepository;
-        }
+        }*/
 
         /*     [HttpGet]
              public async Task<IActionResult> FindAll(UnitRepository _unitRepository)
@@ -54,10 +57,9 @@ namespace GestionDrivApi.Controllers
             return _unitRepository.FindAll();
         }*/
 
-        [HttpGet("")]
+        /*[HttpGet]
         public IActionResult FindAll()
         {
-            _logger.LogDebug("Appel reçu de AdressesController.FindAll");
             List<Unit> list = _unitRepository.FindAll();
             _logger.LogDebug(list.ToString());
             if (list != null)
@@ -68,7 +70,7 @@ namespace GestionDrivApi.Controllers
             {
                 return NotFound();
             }
-        }
+        }*/
 
 
         [HttpGet]
@@ -91,7 +93,10 @@ namespace GestionDrivApi.Controllers
             return CreatedAtAction(nameof(FindById), new { id = newUnit.Id }, newUnit);
         }
 
-        [HttpDelete("{id}")]
+      //  [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("Delete/id={id}")]
+
         public IActionResult Delete([FromRoute] int id)
         {
             OkObjectResult deleteResult = new OkObjectResult(_unitRepository.Delete(id));
