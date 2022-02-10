@@ -69,7 +69,7 @@ namespace authentication.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route("register-client")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             Personne userExists = await _userManager.FindByEmailAsync(model.Email);
@@ -123,6 +123,7 @@ namespace authentication.Controllers
 
             await _userManager.AddToRoleAsync(user, "Admin");
             await _userManager.AddToRoleAsync(user, "Employee");
+            await _userManager.AddToRoleAsync(user, "Client");
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
@@ -201,6 +202,41 @@ namespace authentication.Controllers
         public async Task<Personne> FindByEmail(string email)
         {
             return await _userManager.FindByEmailAsync(email);
+        }
+
+        [HttpPut]
+        [Route("role/client")]
+        public async Task SetRoleClient(string id)
+        {
+            Personne user = await RemoveExistantRoles(id);
+            await _userManager.AddToRoleAsync(user, "Client");
+        }
+
+        [HttpPut]
+        [Route("role/employee")]
+        public async Task SetRoleEmployee(string id)
+        {
+            Personne user = await RemoveExistantRoles(id);
+            await _userManager.AddToRoleAsync(user, "Employee");
+        }
+
+        [HttpPut]
+        [Route("role/admin")]
+        public async Task SetRoleAdmin(string id)
+        {
+            Personne user = await RemoveExistantRoles(id);
+            await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, "Employee");
+            await _userManager.AddToRoleAsync(user, "Client");
+        }
+
+        private async Task<Personne> RemoveExistantRoles(string id)
+        {
+            Personne user = FindById(id);
+
+            var roles = (IEnumerable<string>)_userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+            return user;
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
