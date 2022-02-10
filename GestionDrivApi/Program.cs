@@ -32,7 +32,8 @@ namespace GestionDrivApi
                     var context = services.GetRequiredService<ApplicationContext>();
                     await DbInitializer.Initialize(context);
 
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }

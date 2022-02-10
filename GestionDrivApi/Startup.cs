@@ -40,7 +40,8 @@ namespace GestionDrivApi
 
             services.AddTransient<RayonRepository, RayonRepository>();
 
-            services.AddAuthentication(options => {
+            services.AddAuthentication(options =>
+            {
 
 
 
@@ -50,7 +51,8 @@ namespace GestionDrivApi
 
 
 
-            }).AddJwtBearer(options => {
+            }).AddJwtBearer(options =>
+            {
 
 
 

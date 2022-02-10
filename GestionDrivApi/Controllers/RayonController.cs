@@ -34,5 +34,38 @@ namespace GestionDrivApi.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpGet("id")]
+        public Rayon GetById(int id)
+        {
+            return _rayonRepository.FindById(id);
+        }
+        [HttpGet("listnoms")]
+        public List<Rayon> GetByListNoms( string nom)
+        {
+            return _rayonRepository.FindByListNoms(nom);
+        }
+        [HttpGet("nom")]
+        public Rayon GetByNom(string nom)
+        {
+            return _rayonRepository.FindByNom(nom);
+        }
+        [HttpGet("nomExist")]
+        public bool NomExist(string nom)
+        {
+            return _rayonRepository.ExistNom(nom);
+        }
+        [HttpPost]
+        public IActionResult AddRayon(Rayon newRayon)
+        {
+            Rayon rayon = _rayonRepository.Create(newRayon);
+            return CreatedAtAction(nameof(GetById), new { id = rayon.Id }, newRayon);
+        }
+        
+        [HttpPut]
+        public IActionResult Modify(Rayon ra)
+        {
+            OkObjectResult modifyRayon = new OkObjectResult(_rayonRepository.Update(ra));
+            return modifyRayon;
+        }
     }
 }
