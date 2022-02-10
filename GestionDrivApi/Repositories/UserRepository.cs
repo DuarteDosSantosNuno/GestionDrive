@@ -42,14 +42,14 @@ namespace GestionDrivApi.Repositories
             return  _userManager.Users.Single(user => user.Id == id);
         }
 
-        public Personne FindByName(string name)
-        {
-            return  _userManager.Users.Single(user => user.Nom.ToUpper() == name.ToUpper());
-        }
+        //public Personne FindByName(string name)
+        //{
+        //    return  _userManager.Users.Single(user => user.Nom.ToUpper() == name.ToUpper());
+        //}
 
-        public Personne FindByPrenom(string prenom)
-        {
-            return _userManager.Users.Single(user => user.Prenom.ToUpper() == prenom.ToUpper());
-        }
+        //public Personne FindByPrenom(string prenom)
+        //{
+        //    return _userManager.Users.Single(user => user.Prenom.ToUpper() == prenom.ToUpper());
+        //}
     }
 }

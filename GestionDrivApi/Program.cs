@@ -32,7 +32,8 @@ namespace GestionDrivApi
                     RoleManager<IdentityRole> roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await DbInitializer.Initialize(context, roleManager);
 
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }

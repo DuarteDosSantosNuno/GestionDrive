@@ -183,19 +183,19 @@ namespace authentication.Controllers
             return _userRepo.FindById(id);
         }
 
-        [HttpGet]
-        [Route("nom={name}")]
-        public Personne FindByName(string name)
-        {
-            return _userRepo.FindByName(name);
-        }
+        //[HttpGet]
+        //[Route("nom={name}")]
+        //public Personne FindByName(string name)
+        //{
+        //    return _userRepo.FindByName(name);
+        //}
 
-        [HttpGet]
-        [Route("prenom={prenom}")]
-        public Personne FindByPrenom(string prenom)
-        {
-           return _userRepo.FindByPrenom(prenom);
-        }
+        //[HttpGet]
+        //[Route("prenom={prenom}")]
+        //public Personne FindByPrenom(string prenom)
+        //{
+        //   return _userRepo.FindByPrenom(prenom);
+        //}
 
         [HttpGet]
         [Route("email={email}")]
