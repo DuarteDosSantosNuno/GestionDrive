@@ -1,6 +1,7 @@
 ﻿using GestionDrivApi.Data;
 using GestionDrivApi.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GestionDrivApi.Entities;
@@ -23,7 +24,7 @@ namespace GestionDrivApi.Repositories
             List<Rayon> rayons = await _applicationContext.Rayons.ToListAsync();
             return rayons;
         }
-        public Rayon Create(Rayon newRayon)
+		public Rayon Create(Rayon newRayon)
         {
             Rayon rayon = new Rayon();
             rayon.Nom = newRayon.Nom;
@@ -39,7 +40,7 @@ namespace GestionDrivApi.Repositories
             _applicationContext.SaveChanges();
             return true;
         }
-        public Rayon FindById(int id)
+        public async Task<Rayon>  FindById(int id)
         {
             return _applicationContext.Rayons.Single(ra => ra.Id == id);
         }
@@ -70,6 +71,6 @@ namespace GestionDrivApi.Repositories
             rayon.Nom = newRayon.Nom;
             _applicationContext.SaveChanges();
             return true;
-        }
+		}
     }
 }

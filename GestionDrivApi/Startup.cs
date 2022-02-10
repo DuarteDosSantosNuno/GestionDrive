@@ -39,6 +39,7 @@ namespace GestionDrivApi
             services.AddLogging();
 
             services.AddTransient<RayonRepository, RayonRepository>();
+            services.AddTransient<CategoryRepository, CategoryRepository>();
 
             services.AddAuthentication(options =>
             {

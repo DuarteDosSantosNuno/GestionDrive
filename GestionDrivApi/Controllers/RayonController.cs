@@ -35,9 +35,9 @@ namespace GestionDrivApi.Controllers
             }
         }
         [HttpGet("id")]
-        public Rayon GetById(int id)
+        public async Task<Rayon> GetById(int id)
         {
-            return _rayonRepository.FindById(id);
+            return await _rayonRepository.FindById(id);
         }
         [HttpGet("listnoms")]
         public List<Rayon> GetByListNoms( string nom)
