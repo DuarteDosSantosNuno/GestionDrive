@@ -7,6 +7,7 @@ export default function Checkout() {
       <MDBContainer breakpoint="md">
         <MDBRow>
           <MDBCol center>
+            <h1>Checkout</h1>
             <Modal />
           </MDBCol>
         </MDBRow>
