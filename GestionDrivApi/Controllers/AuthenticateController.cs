@@ -175,6 +175,34 @@ namespace authentication.Controllers
             return Ok(new Response { Status = "Success", Message = "User modified successfully!" });
         }
 
+        [HttpGet]
+        [Route("id={id}")]
+        public Personne FindById(string id)
+        {
+            return _userRepo.FindById(id);
+        }
+
+        [HttpGet]
+        [Route("nom={name}")]
+        public Personne FindByName(string name)
+        {
+            return _userRepo.FindByName(name);
+        }
+
+        [HttpGet]
+        [Route("prenom={prenom}")]
+        public Personne FindByPrenom(string prenom)
+        {
+           return _userRepo.FindByPrenom(prenom);
+        }
+
+        [HttpGet]
+        [Route("email={email}")]
+        public async Task<Personne> FindByEmail(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));

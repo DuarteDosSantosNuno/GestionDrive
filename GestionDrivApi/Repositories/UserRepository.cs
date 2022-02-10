@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionDrivApi.Repositories
@@ -34,6 +35,21 @@ namespace GestionDrivApi.Repositories
             }
 
             return await _userManager.UpdateAsync(foundUser);
+        }
+
+        public Personne FindById(string id)
+        {
+            return  _userManager.Users.Single(user => user.Id == id);
+        }
+
+        public Personne FindByName(string name)
+        {
+            return  _userManager.Users.Single(user => user.Nom.ToUpper() == name.ToUpper());
+        }
+
+        public Personne FindByPrenom(string prenom)
+        {
+            return _userManager.Users.Single(user => user.Prenom.ToUpper() == prenom.ToUpper());
         }
     }
 }
