@@ -51,11 +51,11 @@ namespace GestionDrivApi.Controllers
                  }
              }*/
 
-        /*[HttpGet]
+        [HttpGet]
         public List<Unit> FindAll()
         {
             return _unitRepository.FindAll();
-        }*/
+        }
 
         /*[HttpGet]
         public IActionResult FindAll()
