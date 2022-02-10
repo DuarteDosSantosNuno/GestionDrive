@@ -16,98 +16,90 @@ namespace GestionDrivApi.Controllers
   
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class UnitsController : ControllerBase
+    public class UnitsController : Controller
     {
-        private readonly ILogger<UnitsController> _logger;
+        private UnitRepository _unitRepository;
 
-        private IUnitRepository _unitRepository;
 
- 
-        public UnitsController(ILogger<UnitsController> logger, IUnitRepository unitRepository)
+        public UnitsController(UnitRepository unitRepository)
         {
-            _logger = logger;
-            _unitRepository = (UnitRepository)unitRepository;          
+            _unitRepository = unitRepository;          
         }
 
-        /*public UnitRepository Get_unitRepository()
+        [HttpGet("FindAll")]
+        public async Task<IActionResult> FindAll()
         {
-            return _unitRepository;
-        }*/
-
-        /*     [HttpGet]
-             public async Task<IActionResult> FindAll(UnitRepository _unitRepository)
-             {
-                 try
-                 {
-                     List<Unit> listeUnit = await _unitRepository.FindAll();
-                     if (listeUnit == null)
-                         return NotFound();
-                     else
-                         return Ok(listeUnit);
-                 }
-                 catch (Exception e)
-                 {
-                     return NotFound(e.Message);
-                 }
-             }*/
-
-        [HttpGet]
-        public List<Unit> FindAll()
-        {
-            return _unitRepository.FindAll();
-        }
-
-        /*[HttpGet]
-        public IActionResult FindAll()
-        {
-            List<Unit> list = _unitRepository.FindAll();
-            _logger.LogDebug(list.ToString());
-            if (list != null)
+            try
             {
-                return Ok(list);
+                List<Unit> listeUnit = await _unitRepository.FindAll();
+                if (listeUnit == null)
+                    return NotFound();
+                else
+                    return Ok(listeUnit);
             }
-            else
+            catch (Exception e)
             {
-                return NotFound();
+                return NotFound(e.Message);
             }
-        }*/
-
-
-        [HttpGet]
-        [Route("{id}")]
-        public Unit FindById(int id)
-        {
-            return _unitRepository.FindById(id);
         }
 
-        [HttpGet("{id:int}/exists")]
-        public bool Exists(int id)
+
+        [HttpGet("FindById")]
+        public Unit GetById(int id)
         {
-            return _unitRepository.Exists(id);
+            try
+                {
+                    Unit unit = _unitRepository.FindById(id);
+                    if (unit == null)
+                        return null;
+                    else
+                        return unit;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            
         }
 
-        [HttpPost()]
+        [HttpGet("existUnit")]
+        public bool Exists(string unit)
+        { 
+
+            return _unitRepository.Exists(unit);
+            
+        }
+
+
+        [HttpGet("GetByUnit")]
+        public Unit GetByUnit(string unit)
+        {
+            return _unitRepository.FindByUnit(unit);
+        }
+
+
+        [HttpPost("Create")]
         public IActionResult Create([FromBody] Unit newUnit)
         {
-            newUnit = _unitRepository.Create(newUnit);
-            return CreatedAtAction(nameof(FindById), new { id = newUnit.Id }, newUnit);
+            Unit unit = _unitRepository.Create(newUnit);
+            return CreatedAtAction(nameof(GetById), new { id = newUnit.Id }, newUnit);
         }
 
-      //  [HttpDelete("{id}")]
-        [HttpDelete]
-        [Route("Delete/id={id}")]
-
+       
+        [HttpDelete("Delete")]
         public IActionResult Delete([FromRoute] int id)
         {
             OkObjectResult deleteResult = new OkObjectResult(_unitRepository.Delete(id));
             return deleteResult;
         }
 
-        [HttpPut()]
-        public IActionResult Modify([FromBody] Unit newUnit)
+        [HttpPut("Modify")]
+        public IActionResult Modify(Unit newUnit)
         {
             OkObjectResult modifytResult = new OkObjectResult(_unitRepository.Modify(newUnit));
             return modifytResult;
+
         }
+
     }
 }

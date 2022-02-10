@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GestionDrivApi.Data;
 using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories.Interfaces;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionDrivApi.Repositories
 {
-    public class UnitRepository : IUnitRepository
+    public class UnitRepository 
     {
 
         private ApplicationContext _applicationContext;
+
 
         public UnitRepository(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
         }
 
-        public List<Unit> FindAll()
+        public async Task<List<Unit>> FindAll()
         {
-            return _applicationContext.Units.ToList();
+            List<Unit> units = await _applicationContext.Units.ToListAsync();
+            return units;
+   
+
         }
         public Unit FindById(int id)
         {
-            try
-            {
-                return _applicationContext.Units.Single(unit => unit.Id == id);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
+                return _applicationContext.Units.Single(unit => unit.Id == id);       
         }
 
-        public bool Exists(int id)
+        public bool Exists(string unit)
         {
-            return FindById(id) != null;
+            return FindByUnit(unit) != null;
         }
 
         public Unit Create(Unit newUnit)
         {
+            Unit unit = new Unit();
+            unit.Unite = newUnit.Unite;
+            unit.Prix = newUnit.Prix;
             _applicationContext.Units.Add(newUnit);
             _applicationContext.SaveChanges();
-            return newUnit;
+            return unit;
         }
 
         public bool Delete(int id)
@@ -64,21 +64,26 @@ namespace GestionDrivApi.Repositories
         }
         public bool Modify(Unit newUnit)
         {
-            Unit unitAModifier = FindById(newUnit.Id);
-            if (unitAModifier != null)
-            {
-                unitAModifier.Unite = newUnit.Unite;
-                unitAModifier.Prix = newUnit.Prix;
-                unitAModifier.Product = newUnit.Product;
-
-                _applicationContext.SaveChanges();
-                return true;
-
-            }
-            else
-            {
+            Unit unit = _applicationContext.Units.Single(u => u.Id == newUnit.Id);
+            if (unit == null)
                 return false;
-            }
+            unit.Unite = newUnit.Unite;
+            unit.Prix = newUnit.Prix;
+            unit.Product.Nom = newUnit.Product.Nom;
+            unit.Product.Description = newUnit.Product.Description;
+            unit.Product.Category = newUnit.Product.Category;
+            unit.Product.Quantity_stock = newUnit.Product.Quantity_stock;
+            unit.Product.Category.Nom = newUnit.Product.Category.Nom;
+            unit.Product.Category.Rayon.Nom = newUnit.Product.Category.Rayon.Nom;
+            _applicationContext.SaveChanges();
+            return true;
+        }
+
+
+    
+        public Unit FindByUnit(string unit)
+        {
+            return _applicationContext.Units.Single(u => u.Unite == unit);
         }
     }
 }

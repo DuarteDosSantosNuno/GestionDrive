@@ -11,7 +11,7 @@ namespace GestionDrivApi.Data
     {     
         public async static Task Initialize(ApplicationContext context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             Rayon r1, r2, r3, r4;
@@ -29,6 +29,23 @@ namespace GestionDrivApi.Data
                 await context.AddRangeAsync(rayons);
                 await context.SaveChangesAsync();
             }
+            Unit u1, u2, u3, u4;
+            u1 = u2 = u3 = u4 = null;
+            if (!context.Units.Any())
+            {
+                u1 = new Unit { Unite = "kg", Prix = 12  };
+                u2 = new Unit { Unite = "kg", Prix = 13  };
+                u3 = new Unit { Unite = "kg", Prix = 14,  };
+                u4 = new Unit { Unite = "kg",  Prix = 15, };
+
+                IEnumerable<Unit> units = new List<Unit>()
+                {
+                    u1, u2, u3, u4
+                };
+                await context.AddRangeAsync(units);
+                await context.SaveChangesAsync();
+            }
+
         }
        
     }
