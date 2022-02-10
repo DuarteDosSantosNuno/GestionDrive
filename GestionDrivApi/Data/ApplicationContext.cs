@@ -32,8 +32,6 @@ namespace GestionDrivApi.Data
             modelBuilder.Entity<Rayon>().Property(r => r.Id).HasDefaultValueSql("NEXT VALUE FOR Rayon_id_seq");
             modelBuilder.Entity<Unit>().Property(u => u.Id).HasDefaultValueSql("NEXT VALUE FOR Unit_id_seq");
             modelBuilder.Entity<Commande>().Property(c => c.Id).HasDefaultValueSql("NEXT VALUE FOR Commande_id_seq");
-
-    
-        }
+		}
     }
 }
