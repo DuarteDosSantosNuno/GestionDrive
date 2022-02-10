@@ -11,6 +11,7 @@ namespace GestionDrivApi.Repositories
     public class CategoryRepository
     {
         private ApplicationContext _applicationContext;
+        private RayonRepository _rayonRepository;
 
         public CategoryRepository(ApplicationContext applicationContext)
         {
@@ -93,9 +94,9 @@ namespace GestionDrivApi.Repositories
                                             .SingleAsync();
                 return (category != null);
             }
-            catch (Exception e)
+            catch
             {
-                throw;
+                return false;
             }
         }
 
@@ -109,9 +110,9 @@ namespace GestionDrivApi.Repositories
                                             .SingleAsync();
                 return (category != null);
             }
-            catch (Exception e)
+            catch
             {
-                throw;
+                return false;
             }
         }
 
@@ -119,7 +120,9 @@ namespace GestionDrivApi.Repositories
         {
             try
             {
-                newCategory.Rayon = new Rayon();
+                _applicationContext.ChangeTracker.Clear();
+                _applicationContext.Rayons.Attach(newCategory.Rayon);
+
                 await _applicationContext.Categories.AddAsync(newCategory);
                 await _applicationContext.SaveChangesAsync();
                 return newCategory;
@@ -128,6 +131,31 @@ namespace GestionDrivApi.Repositories
             {
                 throw;
             }
+        }
+
+        public async Task<Category> Modify(Category category)
+        {
+
+            try
+            {
+                Category oldCategory = await _applicationContext.Categories
+                                            .Include(c => c.Rayon)
+                                            .Where(c => c.Id == category.Id)
+                                            .SingleAsync();
+
+                // if (oldCategory == null) -> Exception
+                oldCategory.Nom = category.Nom;
+                Rayon newRayon = await _rayonRepository.FindById(category.Rayon.Id);
+                if (category.Rayon != null)
+                    oldCategory.Rayon = newRayon;
+                await _applicationContext.SaveChangesAsync();
+                return oldCategory;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
         }
     }
 }

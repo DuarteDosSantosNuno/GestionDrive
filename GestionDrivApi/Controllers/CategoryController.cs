@@ -117,9 +117,11 @@ namespace GestionDrivApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category newCategory)
         {
+            bool exist = false;
             try
             {
-                if (!await _CategoryRepository.ExistByName(newCategory.Nom))
+                exist = await _CategoryRepository.ExistByName(newCategory.Nom);
+                if (!exist)
                 {
 
                     Category category = await _CategoryRepository.Create(newCategory);
@@ -127,6 +129,28 @@ namespace GestionDrivApi.Controllers
                 }
                 else
                     return BadRequest($"{newCategory.Nom} Category already exists");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Modify(Category category)
+        {
+            bool exist;
+            try
+            {
+                exist = await _CategoryRepository.ExistById(category.Id);
+                if (exist)
+                {
+
+                    Category newcategory = await _CategoryRepository.Modify(category);
+                    return Ok();
+                }
+                else
+                    return BadRequest($"Unknown Category");
             }
             catch (Exception e)
             {
