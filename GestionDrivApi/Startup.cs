@@ -32,13 +32,14 @@ namespace GestionDrivApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ApplicationContext")));
             services.AddLogging();
 
             services.AddTransient<RayonRepository, RayonRepository>();
+            services.AddTransient<ProductRepository, ProductRepository>();
 
             services.AddAuthentication(options => {
 
