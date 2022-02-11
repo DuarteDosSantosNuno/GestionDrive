@@ -6,6 +6,7 @@ import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/Checkout" exact component={Checkout} />
           <Route component={NotFound} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </MDBContainer>
   );
