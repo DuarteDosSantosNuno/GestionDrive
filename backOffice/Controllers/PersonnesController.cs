@@ -27,7 +27,7 @@ namespace backOffice.Controllers
 
             this.ViewData["users"] = users;
 
-            return View("Views/Personnes/Index.cshtml", users);
+            return View("Views/Personnes/Index.cshtml");
         }
 
         // GET: PersonnesController
@@ -36,12 +36,14 @@ namespace backOffice.Controllers
             Personne user = await _personnesRestServices.FindByEmail(email);
 
             List<Personne> users = new List<Personne>();
-
             users.Add(user);
 
-            this.ViewData["users"] = users;
+            //await _personnesRestServices.GetRoles(user.Id);
 
-            return View("Views/Personnes/Index.cshtml", users);
+            this.ViewData["users"] = users;
+            this.ViewData["userRoles"] = await _personnesRestServices.GetRoles(user.Id);
+
+            return View("Views/Personnes/Index.cshtml");
         }
 
         // GET: PersonnesController/Details/5

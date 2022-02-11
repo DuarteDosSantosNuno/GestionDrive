@@ -18,11 +18,11 @@
             <label for="email"><h4>Recherche d'un Utilisateur par Email :</h4></label> <br>
             <input type="text" name="email" placeholder="Saisir l'email ici" class="text-center" />
             @Html.ValidationMessage("email")
-        </div> <br/>
+        </div> <br />
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </form> <br>
 
-        @*<div class="col-3">
+    @*<div class="col-3">
         <a href="#" class="btn btn-outline-secondary btn-lg btn-block btn_new_user" id="">Créer un nouvel Admin</a>
         </div>*@
 
@@ -34,6 +34,7 @@
                     <th>Prenom</th>
                     <th>Nom</th>
                     <th>Email</th>
+                    <th>Role</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,7 @@
                         <td>@user.Prenom</td>
                         <td>@user.Nom</td>
                         <td>@user.Email</td>
+                        <td>@User.Identity.Name</td>
 
                         @*<td>{{ user.roles ? user.roles|json_encode : '' }}</td>*@
 
@@ -52,8 +54,11 @@
                                     Action
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @* <a class="dropdown-item" href="{{ path ('user_show', {'id': user.id}) }}">Son profil</a>
-                                        <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
+                                    @*<a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Profile</a>*@
+                                    <form class="dropdown-item" method="POST" asp-action="FindById" asp-controller="Personnes" asp-route-id="@user.Email">
+                                            <input type="submit" value="Profile" class="text-center" />
+                                    </form>
+                                    @* <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
                                         <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer ses droits d'Admin</a>
                                         <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer l'utilisateur</a>*@
                                 </ul>
@@ -63,16 +68,9 @@
                 }
             </tbody>
         </table>
-        }
+    }
     else
-        {
-            <div>Aucun Utilisateur enregistré pour le moment</div>
-        }
-
-
-    <div>
-        <a>
-            Rejoignez la page d'accueil en cliquant ici
-        </a>
-    </div>
+    {
+        <div>Aucun Utilisateur enregistré pour le moment</div>
+    }
 </div>

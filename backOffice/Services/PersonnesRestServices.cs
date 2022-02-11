@@ -39,6 +39,17 @@ namespace backOffice.Services
             return users;
         }
 
+        public async Task<List<string>> GetRoles(string id)
+        {
+            var responseHttpClient = await _httpClient.GetAsync($"{urlBase}/getroles/{id}");
+
+            string responseBody = await ResponseBody(responseHttpClient);
+
+            List<string> userRoles = JsonSerializer.Deserialize<List<string>>(responseBody, _serializeOptions);
+
+            return userRoles;
+        }
+
         public async Task<Personne> FindByEmail(string email)
         {
             var responseHttpClient = await _httpClient.GetAsync($"{urlBase}/email={email}");

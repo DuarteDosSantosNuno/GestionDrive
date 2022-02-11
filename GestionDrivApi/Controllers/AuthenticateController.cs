@@ -239,6 +239,13 @@ namespace authentication.Controllers
             return user;
         }
 
+        [HttpGet]
+        [Route("getroles/{id}")]
+        public async Task<List<string>> GetRoles(string id)
+        {
+            return (List<string>) await _userManager.GetRolesAsync(FindById(id));
+        }
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
