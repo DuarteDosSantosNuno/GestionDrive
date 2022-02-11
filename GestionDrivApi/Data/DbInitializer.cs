@@ -31,17 +31,20 @@ namespace GestionDrivApi.Data
                 await context.SaveChangesAsync();
 		    }
 
-            Category c1, c2, c3, c4;
-            c1 = c2 = c3 = c4 = null;
+            Category c1, c2, c3, c4, c5, c6, c7;
+            c1 = c2 = c3 = c4 = c5 = c6 = c7 = null;
             if (!context.Categories.Any())
             {
                 c1 = new Category { Nom = "Lait", Rayon = r1 };
                 c2 = new Category { Nom = "Yaourt", Rayon = r1 };
                 c3 = new Category { Nom = "Beurre", Rayon = r1 };
                 c4 = new Category { Nom = "Pommes", Rayon = r4 };
+                c5 = new Category { Nom = "Pommes", Rayon = r4 };
+                c6 = new Category { Nom = "Pommes", Rayon = r4 };
+                c7 = new Category { Nom = "Pommes", Rayon = r4 };
                 IEnumerable<Category> categories = new List<Category>()
                 {
-                    c1, c2, c3, c4
+                    c1, c2, c3, c4, c5, c6, c7
                 };
                 await context.AddRangeAsync(categories);
                 await context.SaveChangesAsync();
@@ -78,24 +81,6 @@ namespace GestionDrivApi.Data
                 await context.SaveChangesAsync();
             }
 
-            Category c1, c2, c3, c4, c5, c6;
-            c1 = c2 = c3 = c4 = c5 = c6 = null;
-            if (!context.Categories.Any())
-            {
-                c1 = new Category { Nom = "Lait", Rayon = r1 };
-                c2 = new Category { Nom = "Yaourt", Rayon = r1 };
-                c3 = new Category { Nom = "Beurre", Rayon = r1 };
-                c4 = new Category { Nom = "Pommes", Rayon = r4 };
-                c5 = new Category { Nom = "Choux", Rayon = r3 };
-                c6 = new Category { Nom = "Entrecôte", Rayon = r2 };
-                IEnumerable<Category> categories = new List<Category>()
-                {
-                    c1, c2, c3, c4,c5, c6
-                };
-                await context.AddRangeAsync(categories);
-                await context.SaveChangesAsync();
-            }
-
 
             Product p1, p2, p3, p4, p5, p6;
             p1 = p2 = p3 = p4 = p5 = p6 = null;
@@ -104,9 +89,9 @@ namespace GestionDrivApi.Data
                 p1 = new Product { Nom = "Lactel", Description = "Lait Demi écrémé bio stérilisé UHT", Quantity_stock = 100, Category = c1, Disponible = true };
                 p2 = new Product { Nom = "Activia", Description = "Yaourt aux fruits bifidus 0%MG", Quantity_stock = 250, Category = c2, Disponible = true };
                 p3 = new Product { Nom = "Ghana", Description = "Banane Fairtrade filière responsable", Quantity_stock = 75, Category = c4, Disponible = true };
-                p4 = new Product { Nom = "Charal", Description = "Entrecôte boeuf par 1", Quantity_stock = 80, Category = c6, Disponible = true };
+                p4 = new Product { Nom = "Charal", Description = "Entrecôte boeuf par 1", Quantity_stock = 80, Category = c5, Disponible = true };
                 p5 = new Product { Nom = "Boucherie", Description = "Entrecôte à la coupe", Quantity_stock = 110, Category = c6, Disponible = true };
-                p6 = new Product { Nom = "Chou-Fleur", Description = "Chou-fleur provenance France à la pièce", Quantity_stock = 150, Category = c5, Disponible = true };
+                p6 = new Product { Nom = "Chou-Fleur", Description = "Chou-fleur provenance France à la pièce", Quantity_stock = 150, Category = c7, Disponible = true };
 
                 IEnumerable<Product> products = new List<Product>()
                 {
