@@ -10,6 +10,7 @@ namespace GestionDrivApi.ConfigExtension
             services.AddTransient<UserRepository, UserRepository>();
             services.AddTransient<RayonRepository, RayonRepository>();
             services.AddTransient<CategoryRepository, CategoryRepository>();
+            services.AddTransient<UnitRepository, UnitRepository>();
         }
     }
 }
