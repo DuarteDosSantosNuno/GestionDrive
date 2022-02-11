@@ -30,16 +30,16 @@ export default function Navbar() {
           >
             <MDBIcon icon="bars" fas />
           </MDBNavbarToggler>
-          <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+          <MDBNavbarBrand href="/">MomoDrive</MDBNavbarBrand>
           <MDBCollapse navbar show={showNavNoTogglerThird}>
             <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
               <MDBNavbarItem>
                 <MDBNavbarLink active aria-current="page" href="/">
-                  Home
+                  Products
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/Cart">
+                <MDBNavbarLink href="/Order">
                   <MDBBadge pill color="danger">
                     !
                   </MDBBadge>
@@ -51,23 +51,12 @@ export default function Navbar() {
               <MDBNavbarItem>
                 <MDBNavbarLink href="/Checkout">Checkout</MDBNavbarLink>
               </MDBNavbarItem>
-
-              <MDBNavbarItem>
-                <MDBNavbarLink
-                  disabled
-                  href="#"
-                  tabIndex={-1}
-                  aria-disabled="true"
-                >
-                  Disabled
-                </MDBNavbarLink>
-              </MDBNavbarItem>
             </MDBNavbarNav>
             <form className="d-flex input-group w-auto">
               <input
                 type="search"
                 className="form-control"
-                placeholder="Type query"
+                placeholder="product..."
                 aria-label="Search"
               />
               <MDBBtn color="primary">Search</MDBBtn>

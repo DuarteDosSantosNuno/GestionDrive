@@ -10,7 +10,7 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 
-export default function Modal() {
+export default function Modal(props) {
   const [basicModal, setBasicModal] = useState(false);
 
   const toggleShow = () => setBasicModal(!basicModal);
@@ -29,15 +29,13 @@ export default function Modal() {
                 onClick={toggleShow}
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>
-              OK to proceed to checkout, cancel to go back to your cart
-            </MDBModalBody>
+            <MDBModalBody>{props.bodyText}</MDBModalBody>
 
             <MDBModalFooter>
-              <MDBBtn color="secondary" onClick={toggleShow}>
+              <MDBBtn color="warning" onClick={toggleShow}>
                 Cancel
               </MDBBtn>
-              <MDBBtn>OK</MDBBtn>
+              <MDBBtn color="success">OK</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
