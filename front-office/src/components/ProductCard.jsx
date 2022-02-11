@@ -5,38 +5,26 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCardImage,
+  MDBCardFooter,
   MDBBtn,
-  MDBRipple,
 } from "mdb-react-ui-kit";
 
-export default function ProductCard() {
+export default function ProductCard(props) {
   return (
-    <MDBCard style={{ maxWidth: "22rem" }}>
-      <MDBRipple
-        rippleColor="light"
-        rippleTag="div"
-        className="bg-image hover-overlay"
-      >
-        <MDBCardImage
-          src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
-          fluid
-          alt="..."
-        />
-        <a>
-          <div
-            className="mask"
-            style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-          ></div>
-        </a>
-      </MDBRipple>
+    <MDBCard className="h-100" style={{ maxWidth: "22rem" }}>
+      <MDBCardImage src={props.img} alt="..." position="top" />
       <MDBCardBody>
-        <MDBCardTitle>Card title</MDBCardTitle>
+        <MDBCardTitle>Product name</MDBCardTitle>
         <MDBCardText>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio autem
+          natus quae quaerat. Quasi doloribus saepe repellat alias tempore
+          neque?
         </MDBCardText>
-        <MDBBtn href="#">Button</MDBBtn>
+        <MDBBtn href="#">{props.msg}</MDBBtn>{" "}
       </MDBCardBody>
+      <MDBCardFooter>
+        <small className="text-muted">Something useful goes here</small>
+      </MDBCardFooter>
     </MDBCard>
   );
 }
