@@ -62,17 +62,29 @@ namespace GestionDrivApi.Controllers
             
         }
 
-        [HttpGet("existUnit")]
-        public bool Exists(string unit)
-        { 
+        /* [HttpGet("existUnit")]
+         public bool Exists(string unit)
+         { 
 
-            return _unitRepository.Exists(unit);
-            
+             return _unitRepository.Exists(unit);
+
+         }*/
+        [HttpGet("existUnit")]
+        public bool GetExists(string unit)
+        {
+            try
+            {
+                return _unitRepository.Exists(unit);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
 
-
         [HttpGet("GetByUnit")]
-        public Unit GetByUnit(string unit)
+        public List<Unit> GetByUnit(string unit)
         {
             return _unitRepository.FindByUnit(unit);
         }
@@ -86,7 +98,7 @@ namespace GestionDrivApi.Controllers
         }
 
        
-        [HttpDelete("Delete")]
+        [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
             OkObjectResult deleteResult = new OkObjectResult(_unitRepository.Delete(id));

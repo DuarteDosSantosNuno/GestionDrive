@@ -69,21 +69,33 @@ namespace GestionDrivApi.Repositories
                 return false;
             unit.Unite = newUnit.Unite;
             unit.Prix = newUnit.Prix;
-            unit.Product.Nom = newUnit.Product.Nom;
-            unit.Product.Description = newUnit.Product.Description;
+            unit.Product = newUnit.Product;
+            /*unit.Product.Description = newUnit.Product.Description;
             unit.Product.Category = newUnit.Product.Category;
             unit.Product.Quantity_stock = newUnit.Product.Quantity_stock;
             unit.Product.Category.Nom = newUnit.Product.Category.Nom;
-            unit.Product.Category.Rayon.Nom = newUnit.Product.Category.Rayon.Nom;
+            unit.Product.Category.Rayon.Nom = newUnit.Product.Category.Rayon.Nom;*/
             _applicationContext.SaveChanges();
             return true;
         }
 
 
-    
-        public Unit FindByUnit(string unit)
+
+        /*public Unit FindByUnit(string unit)
         {
             return _applicationContext.Units.Single(u => u.Unite == unit);
+        }*/
+        public List<Unit> FindByUnit(string unit)
+        {
+            List<Unit> units = _applicationContext.Units.ToList();
+            foreach (Unit line in units)
+            {
+                if (line.Unite == unit)
+                    return _applicationContext.Units.Where(u => u.Unite.ToUpper().Contains(unit.ToUpper())).ToList();
+            }
+            return null;
+
+
         }
     }
 }
