@@ -8,6 +8,8 @@ namespace GestionDrivApi.ConfigExtension
         public static void AddCustomUserInjectionService(this IServiceCollection services)
         {
             services.AddTransient<UserRepository, UserRepository>();
+            services.AddTransient<RayonRepository, RayonRepository>();
+            services.AddTransient<CategoryRepository, CategoryRepository>();
         }
     }
 }
