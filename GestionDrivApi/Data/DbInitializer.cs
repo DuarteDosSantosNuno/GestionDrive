@@ -12,7 +12,7 @@ namespace GestionDrivApi.Data
             ApplicationContext context,
             RoleManager<IdentityRole> roleManager)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             Rayon r1, r2, r3, r4;
@@ -96,6 +96,8 @@ namespace GestionDrivApi.Data
                 await roleManager.CreateAsync(admin);
                 await roleManager.CreateAsync(employee);
             }
+           
+
         }
 
     }

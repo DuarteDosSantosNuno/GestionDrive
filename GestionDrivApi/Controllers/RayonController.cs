@@ -34,6 +34,7 @@ namespace GestionDrivApi.Controllers
                 return NotFound(e.Message);
             }
         }
+
         [HttpGet("id")]
         public async Task<Rayon> GetById(int id)
         {
@@ -67,5 +68,6 @@ namespace GestionDrivApi.Controllers
             OkObjectResult modifyRayon = new OkObjectResult(_rayonRepository.Update(ra));
             return modifyRayon;
         }
+
     }
 }
