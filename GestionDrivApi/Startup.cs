@@ -35,7 +35,7 @@ namespace GestionDrivApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddCustomUserInjectionService();
 
@@ -47,7 +47,6 @@ namespace GestionDrivApi
                 .AddDefaultTokenProviders();
 
             services.AddLogging();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //ou lieu de "Bearer"
