@@ -54,14 +54,14 @@ namespace GestionDrivApi.Controllers
         {
             return _rayonRepository.ExistNom(nom);
         }
-        [HttpPost]
+        [HttpPost("Create")]
         public IActionResult AddRayon(Rayon newRayon)
         {
             Rayon rayon = _rayonRepository.Create(newRayon);
             return CreatedAtAction(nameof(GetById), new { id = rayon.Id }, newRayon);
         }
         
-        [HttpPut]
+        [HttpPut("Modify")]
         public IActionResult Modify(Rayon ra)
         {
             OkObjectResult modifyRayon = new OkObjectResult(_rayonRepository.Update(ra));
