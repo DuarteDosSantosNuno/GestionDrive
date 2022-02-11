@@ -34,7 +34,35 @@ namespace backOffice.Controllers
         public async Task<ActionResult> FindByEmail(string email)
         {
             Personne user = await _personnesRestServices.FindByEmail(email);
+            return await ToIndexPage(user);
+        }
 
+        public async Task<ActionResult> SetRoleAdmin(string id)
+        {
+            await _personnesRestServices.SetRoleAdmin(id);
+
+            Personne user = await _personnesRestServices.FindById(id);
+            return await ToIndexPage(user);
+        }
+
+        public async Task<ActionResult> SetRoleClient(string id)
+        {
+            await _personnesRestServices.SetRoleClient(id);
+
+            Personne user = await _personnesRestServices.FindById(id);
+            return await ToIndexPage(user);
+        }
+
+        public async Task<ActionResult> SetRoleEmployee(string id)
+        {
+            await _personnesRestServices.SetRoleEmployee(id);
+
+            Personne user = await _personnesRestServices.FindById(id);
+            return await ToIndexPage(user);
+        }
+
+        private async Task<ActionResult> ToIndexPage(Personne user)
+        {
             List<Personne> users = new List<Personne>();
             users.Add(user);
 

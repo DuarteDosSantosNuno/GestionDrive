@@ -50,6 +50,31 @@ namespace backOffice.Services
             return userRoles;
         }
 
+        public async Task SetRoleClient(string id)
+        {
+            await _httpClient.GetAsync($"{urlBase}/role/client/{id}");
+        }
+
+        public async Task SetRoleEmployee(string id)
+        {
+            await _httpClient.GetAsync($"{urlBase}/role/employee/{id}");
+        }
+
+        public async Task<Personne> FindById(string id)
+        {
+            var responseHttpClient = await _httpClient.GetAsync($"{urlBase}/id={id}");
+            string responseBody = await ResponseBody(responseHttpClient);
+
+            Personne user = JsonSerializer.Deserialize<Personne>(responseBody, _serializeOptions);
+
+            return user;
+        }
+
+        public async Task SetRoleAdmin(string id)
+        {
+            await _httpClient.GetAsync($"{urlBase}/role/admin/{id}");
+        }
+
         public async Task<Personne> FindByEmail(string email)
         {
             var responseHttpClient = await _httpClient.GetAsync($"{urlBase}/email={email}");

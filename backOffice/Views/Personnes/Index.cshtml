@@ -16,10 +16,10 @@
 
     <form class="dropdown form-group" method="POST" asp-action="FindByEmail" asp-controller="Personnes">
         <div class="form-group">
-            <label for="email"><h4>Recherche d'un Utilisateur par Email :</h4></label> <br>
+            <label for="email"><h4>Recherche d'un Utilisateur par Email :</h4></label> <br/>
             <input type="text" name="email" placeholder="Saisir l'email ici" class="text-center" />
             @Html.ValidationMessage("email")
-        </div> <br />
+        </div> <br/>
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </form> <br>
 
@@ -29,56 +29,56 @@
 
     @if (users.Count > 0)
     {
-            <table class="text-center table table-striped table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th>Prenom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        @if(userRoles != null){
-                            <th>Role</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach (backOffice.Models.Personne user in users)
-                {
-                    <tr>
-                        <td>@user.Prenom</td>
-                        <td>@user.Nom</td>
-                        <td>@user.Email</td>
-                        @if (userRoles != null)
-                        {
-                            <td>
-                                @foreach (string role in userRoles)
-                                {
-                                    <p>@role</p>
-                                }
-                            </td>
-                        }
-
-                        @*<td>{{ user.roles ? user.roles|json_encode : '' }}</td>*@
-
+        <table class="text-center table table-striped table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    @if(userRoles != null){
+                        <th>Role</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (backOffice.Models.Personne user in users)
+            {
+                <tr>
+                    <td>@user.Prenom</td>
+                    <td>@user.Nom</td>
+                    <td>@user.Email</td>
+                    @if (userRoles != null)
+                    {
                         <td>
-                            <div class="col-3 mb-1">
-                                <button type="button" class="background-color btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="bouton2">
-                                    Action
-                                </button>
-                                <ul class="dropdown-menu">
-                            @*<a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Profile</a>*@
-                                    <form class="dropdown-item" method="POST" asp-action="FindByEmail" asp-controller="Personnes" asp-route-id="@user.Email">
-                                            <input type="submit" value="Profile" class="text-center" />
-                                    </form>
-                            @* <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
-                                <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer ses droits d'Admin</a>
-                                <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer l'utilisateur</a>*@
-                                </ul>
-                            </div>
+                            @foreach (string role in userRoles)
+                            {
+                                <span>@role,</span>
+                            }
                         </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+                    }
+
+                    <td>
+                        <div class="col-3 mb-1">
+                            <button type="button" class="background-color btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="bouton2">
+                                Set role
+                            </button>
+                            <ul class="dropdown-menu">
+                                <form class="dropdown-item" method="POST" asp-action="SetRoleAdmin" asp-controller="Personnes" asp-route-id="@user.Id">
+                                        <input type="submit" value="Make Admin" class="text-center" />
+                                </form>
+                                <form class="dropdown-item" method="POST" asp-action="SetRoleClient" asp-controller="Personnes" asp-route-id="@user.Id">
+                                        <input type="submit" value="Make Client" class="text-center" />
+                                </form>
+                                <form class="dropdown-item" method="POST" asp-action="SetRoleEmployee" asp-controller="Personnes" asp-route-id="@user.Id">
+                                        <input type="submit" value="Make Employee" class="text-center" />
+                                </form>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
     else
     {

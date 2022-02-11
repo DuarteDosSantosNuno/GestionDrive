@@ -204,39 +204,44 @@ namespace authentication.Controllers
             return await _userManager.FindByEmailAsync(email);
         }
 
-        [HttpPut]
-        [Route("role/client")]
+        [HttpGet]
+        [Route("role/client/{id}")]
         public async Task SetRoleClient(string id)
         {
-            Personne user = await RemoveExistantRoles(id);
+            Personne user = FindById(id);
+            await RemoveExistantRoles(id);
             await _userManager.AddToRoleAsync(user, "Client");
         }
 
-        [HttpPut]
-        [Route("role/employee")]
+        [HttpGet]
+        [Route("role/employee/{id}")]
         public async Task SetRoleEmployee(string id)
         {
-            Personne user = await RemoveExistantRoles(id);
+            Personne user = FindById(id);
+            await RemoveExistantRoles(id);
             await _userManager.AddToRoleAsync(user, "Employee");
         }
 
-        [HttpPut]
-        [Route("role/admin")]
+        [HttpGet]
+        [Route("role/admin/{id}")]
         public async Task SetRoleAdmin(string id)
         {
-            Personne user = await RemoveExistantRoles(id);
+            Personne user = FindById(id);
+            await RemoveExistantRoles(id);
             await _userManager.AddToRoleAsync(user, "Admin");
             await _userManager.AddToRoleAsync(user, "Employee");
             await _userManager.AddToRoleAsync(user, "Client");
         }
 
-        private async Task<Personne> RemoveExistantRoles(string id)
+        [HttpGet]
+        [Route("role/remove")]
+        public async Task RemoveExistantRoles(string id)
         {
             Personne user = FindById(id);
 
-            var roles = (IEnumerable<string>)_userManager.GetRolesAsync(user);
+            var roles = (IEnumerable<string>) await GetRoles(id);
+
             await _userManager.RemoveFromRolesAsync(user, roles);
-            return user;
         }
 
         [HttpGet]

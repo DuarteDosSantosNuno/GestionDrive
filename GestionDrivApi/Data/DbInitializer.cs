@@ -150,13 +150,13 @@ namespace GestionDrivApi.Data
                
             if (!roleManager.Roles.Any())
             {
-                IdentityRole user = new IdentityRole("Client");
-                IdentityRole employee = new IdentityRole("Employee");
                 IdentityRole admin = new IdentityRole("Admin");
+                IdentityRole employee = new IdentityRole("Employee");
+                IdentityRole user = new IdentityRole("Client");
 
-                await roleManager.CreateAsync(user);
                 await roleManager.CreateAsync(admin);
                 await roleManager.CreateAsync(employee);
+                await roleManager.CreateAsync(user);
             }
 
         }
