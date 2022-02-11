@@ -28,8 +28,6 @@ namespace GestionDrivApi.Data
 
             }
 
-
-
             Category c1, c2, c3, c4, c5, c6, c7;
             c1 = c2 = c3 = c4 = c5 = c6 = c7 = null;
             if (!context.Categories.Any())
@@ -44,6 +42,7 @@ namespace GestionDrivApi.Data
                 IEnumerable<Category> categories = new List<Category>()
                 {
                 c1, c2, c3, c4, c5, c6, c7
+
                 };
                 await context.AddRangeAsync(categories);
             }
@@ -145,8 +144,10 @@ namespace GestionDrivApi.Data
                 };
                 await context.AddRangeAsync(units);
                 await context.SaveChangesAsync();
+
 		    }
 
+               
             if (!roleManager.Roles.Any())
             {
                 IdentityRole user = new IdentityRole("Client");
