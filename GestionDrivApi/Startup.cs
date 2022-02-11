@@ -48,6 +48,11 @@ namespace GestionDrivApi
 
             services.AddLogging();
 
+            services.AddTransient<RayonRepository, RayonRepository>();
+            services.AddTransient<CategoryRepository, CategoryRepository>();
+            services.AddTransient<UserRepository, UserRepository>();
+            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //ou lieu de "Bearer"
