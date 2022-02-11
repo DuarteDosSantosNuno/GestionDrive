@@ -4,9 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GestionDrivApi.Entities;
 using System.Linq;
-using System;
 
 namespace GestionDrivApi.Repositories
 {
@@ -42,7 +40,14 @@ namespace GestionDrivApi.Repositories
         }
         public async Task<Rayon>  FindById(int id)
         {
-            return _applicationContext.Rayons.Single(ra => ra.Id == id);
+            try
+            {
+                return _applicationContext.Rayons.Single(ra => ra.Id == id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         public List<Rayon> FindByListNoms(string nom)
         {
