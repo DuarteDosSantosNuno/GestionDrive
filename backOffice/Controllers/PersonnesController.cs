@@ -30,6 +30,20 @@ namespace backOffice.Controllers
             return View("Views/Personnes/Index.cshtml", users);
         }
 
+        // GET: PersonnesController
+        public async Task<ActionResult> FindByEmail(string email)
+        {
+            Personne user = await _personnesRestServices.FindByEmail(email);
+
+            List<Personne> users = new List<Personne>();
+
+            users.Add(user);
+
+            this.ViewData["users"] = users;
+
+            return View("Views/Personnes/Index.cshtml", users);
+        }
+
         // GET: PersonnesController/Details/5
         public ActionResult Details(int id)
         {
