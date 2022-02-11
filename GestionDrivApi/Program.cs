@@ -1,12 +1,11 @@
 using GestionDrivApi.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionDrivApi
@@ -30,7 +29,8 @@ namespace GestionDrivApi
                 try
                 {
                     var context = services.GetRequiredService<ApplicationContext>();
-                    await DbInitializer.Initialize(context);
+                    RoleManager<IdentityRole> roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await DbInitializer.Initialize(context, roleManager);
 
                 }
                 catch (Exception ex)

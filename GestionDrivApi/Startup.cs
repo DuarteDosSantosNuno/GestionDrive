@@ -1,9 +1,12 @@
+using GestionDrivApi.ConfigExtension;
 using GestionDrivApi.Data;
+using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,41 +37,35 @@ namespace GestionDrivApi
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddCustomUserInjectionService();
+
             services.AddDbContext<ApplicationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ApplicationContext")));
-            services.AddLogging();
 
-            services.AddTransient<RayonRepository, RayonRepository>();
-            services.AddTransient<CategoryRepository, CategoryRepository>();
+            services.AddIdentity<Personne, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddLogging();
 
             services.AddAuthentication(options =>
             {
-
-
-
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //ou lieu de "Bearer"
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-
-
             }).AddJwtBearer(options =>
             {
-
-
-
-                string maCle = "cestuneclequejevaisutiliserpourcryptermontoken";
-
-
+                //string maCle = "cestuneclequejevaisutiliserpourcryptermontoken";
 
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(maCle)),
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["JWT:Secret"])),
                     ValidateAudience = false,
                     ValidateIssuer = false,
                     ValidateActor = true,
-                    ValidateLifetime = true
+                    //ValidateLifetime = true
                 };
             });
 

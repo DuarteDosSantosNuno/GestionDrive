@@ -1,17 +1,18 @@
-﻿
-
-using GestionDrivApi.Entities;
+﻿using GestionDrivApi.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestionDrivApi.Data
 {
-    public static class DbInitializer
-    {
-        public async static Task Initialize(ApplicationContext context)
+    public static class DbInitializer 
+    {     
+        public async static Task Initialize(
+            ApplicationContext context,
+            RoleManager<IdentityRole> roleManager)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             Rayon r1, r2, r3, r4;
@@ -28,7 +29,7 @@ namespace GestionDrivApi.Data
                 };
                 await context.AddRangeAsync(rayons);
                 await context.SaveChangesAsync();
-		}
+		    }
 
             Category c1, c2, c3, c4;
             c1 = c2 = c3 = c4 = null;
@@ -45,6 +46,19 @@ namespace GestionDrivApi.Data
                 await context.AddRangeAsync(categories);
                 await context.SaveChangesAsync();
 			}
+
+            if (!roleManager.Roles.Any())
+            {
+                IdentityRole user = new IdentityRole("Client");
+                IdentityRole employee = new IdentityRole("Employee");
+                IdentityRole admin = new IdentityRole("Admin");
+
+                //await context.Cerfas.AddRangeAsync(mesCerfas);
+                //await context.SaveChangesAsync();
+                await roleManager.CreateAsync(user);
+                await roleManager.CreateAsync(admin);
+                await roleManager.CreateAsync(employee);
+            }
         }
 
     }

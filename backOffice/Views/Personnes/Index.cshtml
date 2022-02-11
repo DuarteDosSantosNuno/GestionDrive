@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    List<backOffice.Models.Personne> users = (List<backOffice.Models.Personne>)ViewData["users"];
+}
+
+<div class="container-fluid">
+    @*{% if is_granted ('ROLE_MIDDLE_ADMIN')%}
+        <div class="container-fluid justify-content-center mt-5 mb-5">
+
+        {% if users | length != 1 %}
+        <h2>Liste des {{ users | length }} utilisateurs enregistrés</h2> </br>
+        {% else %}
+        <h2>L'Utilisateur enregistré</h2> </br>
+        {% endif %}*@
+
+    @*<form class="dropdown form-group" method="POST" action="{{ path ('user_search') }}">
+        <div class="form-group">
+            <label for="email"><h4>Recherche d'un Utilisateur par Email :</h4></label> <br>
+            <input type="text" name="email" placeholder="Saisir l'email ici" class="text-center" />
+            @Html.ValidationMessage("email")
+        </div>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form> <br>
+
+    <div class="col-3">
+        <a href="#" class="btn btn-outline-secondary btn-lg btn-block btn_new_user" id="">Créer un nouvel Admin</a>
+    </div>*@
+
+    <table class="text-center table table-striped table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (backOffice.Models.Personne user in users)
+            {
+                <tr>
+                    <td>@user.Prenom</td>
+                    <td>@user.Nom</td>
+                    <td>@user.Email</td>
+
+                    @*<td>{{ user.roles ? user.roles|json_encode : '' }}</td>*@
+
+                    <td>
+                        <div class="col-3 mb-1">
+                            <button type="button" class="background-color btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="bouton2">
+                                Action
+                            </button>
+                            <ul class="dropdown-menu">
+                                @* <a class="dropdown-item" href="{{ path ('user_show', {'id': user.id}) }}">Son profil</a>
+                                    <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
+                                    <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer ses droits d'Admin</a>
+                                    <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer l'utilisateur</a>*@
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            } else {
+
+            <tr>
+                <td colspan="12">Aucun Utilisateur enregistré pour le moment</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a>
+            Rejoignez la page d'accueil en cliquant ici
+        </a>
+    </div>
+    @*{% endif %}*@
+</div>
