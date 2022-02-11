@@ -38,8 +38,6 @@ namespace backOffice.Controllers
             List<Personne> users = new List<Personne>();
             users.Add(user);
 
-            //await _personnesRestServices.GetRoles(user.Id);
-
             this.ViewData["users"] = users;
             this.ViewData["userRoles"] = await _personnesRestServices.GetRoles(user.Id);
 

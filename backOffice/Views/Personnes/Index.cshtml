@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
     List<backOffice.Models.Personne> users = (List<backOffice.Models.Personne>)ViewData["users"];
+    List<string> userRoles = (List<string>)ViewData["userRoles"];
 }
 
 <div class="container-fluid">
@@ -28,23 +29,33 @@
 
     @if (users.Count > 0)
     {
-        <table class="text-center table table-striped table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th>Prenom</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody>
+            <table class="text-center table table-striped table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        @if(userRoles != null){
+                            <th>Role</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
                 @foreach (backOffice.Models.Personne user in users)
                 {
                     <tr>
                         <td>@user.Prenom</td>
                         <td>@user.Nom</td>
                         <td>@user.Email</td>
-                        <td>@User.Identity.Name</td>
+                        @if (userRoles != null)
+                        {
+                            <td>
+                                @foreach (string role in userRoles)
+                                {
+                                    <p>@role</p>
+                                }
+                            </td>
+                        }
 
                         @*<td>{{ user.roles ? user.roles|json_encode : '' }}</td>*@
 
@@ -54,23 +65,23 @@
                                     Action
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @*<a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Profile</a>*@
-                                    <form class="dropdown-item" method="POST" asp-action="FindById" asp-controller="Personnes" asp-route-id="@user.Email">
+                            @*<a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Profile</a>*@
+                                    <form class="dropdown-item" method="POST" asp-action="FindByEmail" asp-controller="Personnes" asp-route-id="@user.Email">
                                             <input type="submit" value="Profile" class="text-center" />
                                     </form>
-                                    @* <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
-                                        <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer ses droits d'Admin</a>
-                                        <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer l'utilisateur</a>*@
+                            @* <a class="dropdown-item" href={{ path ('make_admin', {'id': user.id}) }}>Rendre Admin</a>
+                                <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer ses droits d'Admin</a>
+                                <a class="dropdown-item" href={{ path ('revoke_admin', {'id': user.id}) }}>Supprimer l'utilisateur</a>*@
                                 </ul>
                             </div>
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
     }
     else
     {
-        <div>Aucun Utilisateur enregistré pour le moment</div>
+            <div>Aucun Utilisateur enregistré pour le moment</div>
     }
 </div>
