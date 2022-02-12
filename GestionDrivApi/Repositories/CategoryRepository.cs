@@ -13,9 +13,10 @@ namespace GestionDrivApi.Repositories
         private ApplicationContext _applicationContext;
         private RayonRepository _rayonRepository;
 
-        public CategoryRepository(ApplicationContext applicationContext)
+        public CategoryRepository(ApplicationContext applicationContext, RayonRepository rayonRepository)
         {
             _applicationContext = applicationContext;
+            _rayonRepository = rayonRepository;
         }
 
         public async Task<List<Category>> FindAll()
@@ -140,8 +141,7 @@ namespace GestionDrivApi.Repositories
             {
                 Category oldCategory = await _applicationContext.Categories
                                             .Include(c => c.Rayon)
-                                            .Where(c => c.Id == category.Id)
-                                            .SingleAsync();
+                                            .SingleAsync(c => c.Id == category.Id);
 
                 // if (oldCategory == null) -> Exception
                 oldCategory.Nom = category.Nom;
