@@ -14,16 +14,12 @@ export default function ProductCard(props) {
     <MDBCard className="h-100" style={{ maxWidth: "22rem" }}>
       <MDBCardImage src={props.img} alt="..." position="top" />
       <MDBCardBody>
-        <MDBCardTitle>Product name</MDBCardTitle>
-        <MDBCardText>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio autem
-          natus quae quaerat. Quasi doloribus saepe repellat alias tempore
-          neque?
-        </MDBCardText>
-        <MDBBtn href="#">{props.msg}</MDBBtn>{" "}
+        <MDBCardTitle>{props.name}</MDBCardTitle>
+        <MDBCardText>{props.text}</MDBCardText>
+        <MDBBtn href="#">{props.btn}</MDBBtn>{" "}
       </MDBCardBody>
       <MDBCardFooter>
-        <small className="text-muted">Something useful goes here</small>
+        <small className="text-muted">{props.price} €/piece</small>
       </MDBCardFooter>
     </MDBCard>
   );
