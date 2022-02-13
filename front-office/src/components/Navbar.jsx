@@ -7,11 +7,11 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  MDBBtn,
   MDBNavbarNav,
   MDBIcon,
   MDBBadge,
 } from "mdb-react-ui-kit";
+import CartCounter from "./CartCounter";
 
 export default function Navbar() {
   const [showNavNoTogglerThird, setShowNavNoTogglerThird] = useState(false);
@@ -40,27 +40,13 @@ export default function Navbar() {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href="/Order">
-                  <MDBBadge pill color="danger">
-                    !
-                  </MDBBadge>
-                  <span>
-                    <MDBIcon fas icon="shopping-cart"></MDBIcon>
-                  </span>
+                  <CartCounter counter="1" />
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink href="/Checkout">Checkout</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
-            <form className="d-flex input-group w-auto">
-              <input
-                type="search"
-                className="form-control"
-                placeholder="product..."
-                aria-label="Search"
-              />
-              <MDBBtn color="primary">Search</MDBBtn>
-            </form>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
