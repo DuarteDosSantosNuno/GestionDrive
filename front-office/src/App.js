@@ -6,6 +6,8 @@ import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Authentification from "./pages/Authentification";
 
 export default function App() {
   return (
@@ -16,6 +18,7 @@ export default function App() {
           <Route path="/" exact component={Home} />
           <Route path="/Order" exact component={Order} />
           <Route path="/Checkout" exact component={Checkout} />
+          <Route path="/Authentification" exact component={Authentification} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
