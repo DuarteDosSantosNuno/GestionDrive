@@ -11,10 +11,12 @@ namespace GestionDrivApi.Repositories
     public class CommandeRepository
     {
         private ApplicationContext _applicationContext;
+        private UserRepository _userRepository;
 
-        public CommandeRepository(ApplicationContext applicationContext)
+        public CommandeRepository(ApplicationContext applicationContext,UserRepository userRepository)
         {
             _applicationContext = applicationContext;
+            _userRepository = userRepository;   
         }
 
         public async Task<List<Commande>> FindAll()
@@ -114,18 +116,19 @@ namespace GestionDrivApi.Repositories
         {
             try
             {
-                DateTime dd = dateLivraison.Date;
-                TimeSpan tt = dateLivraison.TimeOfDay;
-                DateTime d = (DateTime)await _applicationContext.Commandes
-                                    .Where(c => c.Id == 1)
-                                    .Select(c => c.DateLivraison)
-                                    .FirstOrDefaultAsync();
+                //DateTime dd = dateLivraison.Date;
+                //TimeSpan tt = dateLivraison.TimeOfDay;
+                //DateTime? d = await _applicationContext.Commandes
+                //                    .Where(c => c.Id == 1)
+                //                    .Select(c => c.DateLivraison)
+                //                    .FirstOrDefaultAsync();
 
                 List<Commande> cm = await _applicationContext.Commandes
                             .Include(p => p.Product)
                             .Include(c => c.Client)
                             .Include(e => e.Employee)
-                            .Where(cm => cm.DateLivraison == dateLivraison).ToListAsync();
+                            .Where(cm => cm.DateLivraison.Value.Date == dateLivraison.Date & cm.Status != StatusCommandeEnum.annuler)
+                            .ToListAsync();
                 return cm;
             }
             catch (InvalidOperationException e)
@@ -142,7 +145,7 @@ namespace GestionDrivApi.Repositories
                             .Include(p => p.Product)
                             .Include(c => c.Client)
                             .Include(e => e.Employee)
-                            .Where(cm => cm.DateCommande == dateCommande).ToListAsync();
+                            .Where(cm => cm.DateCommande.Date == dateCommande.Date & cm.Status != StatusCommandeEnum.annuler).ToListAsync();
                 return cm;
             }
             catch (InvalidOperationException e)
@@ -171,7 +174,7 @@ namespace GestionDrivApi.Repositories
             {
                 Personne client = null;
                 if (newCommande[0].Client != null)
-                    client = null; //await _personRepository.FindById(newCommande.Client.Id);
+                    client = _userRepository.FindById(newCommande[0].Client.Id); //id de personne(client) connecté
 
                 string numeroCommande = await GenereateNumeroCommmande();
   
@@ -196,7 +199,7 @@ namespace GestionDrivApi.Repositories
             }
         }
 
-        public async Task<bool> PrisEnCharge(string numeroCommande)
+        public async Task<bool> PrisEnCharge(string numeroCommande,string idPersonne)
         {
             try
             {
@@ -207,8 +210,7 @@ namespace GestionDrivApi.Repositories
                 foreach (var c in commande)
                 {
                     c.DatePreparation = DateTime.Now;
-                    c.Employee = null; //await _personRepository.FindById(idPerson);
-
+                    c.Employee = _userRepository.FindById(idPersonne); //id de personne(employee) connecté
                     await _applicationContext.SaveChangesAsync();
                 }
                 return true;

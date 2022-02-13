@@ -1,5 +1,6 @@
 ﻿using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace GestionDrivApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    //[Authorize]
     public class CommandeController : Controller
     {
         private CommandeRepository _commandeRepository;
@@ -101,11 +103,11 @@ namespace GestionDrivApi.Controllers
         }
 
         [HttpPut("Prisencharge")]
-        public async Task<IActionResult> PrisEnCharge(string numeroCommande)
+        public async Task<IActionResult> PrisEnCharge(string numeroCommande, string idPersonne)
         {
             try
             {
-                OkObjectResult prisEnChargeResult = new OkObjectResult(await _commandeRepository.PrisEnCharge(numeroCommande));
+                OkObjectResult prisEnChargeResult = new OkObjectResult(await _commandeRepository.PrisEnCharge(numeroCommande,idPersonne));
                 if (prisEnChargeResult.Value is false)
                     return BadRequest("La commande n'existe pas");
                 else
