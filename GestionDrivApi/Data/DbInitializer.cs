@@ -28,6 +28,7 @@ namespace GestionDrivApi.Data
 
             }
 
+
             Category c1, c2, c3, c4, c5, c6, c7;
             c1 = c2 = c3 = c4 = c5 = c6 = c7 = null;
             if (!context.Categories.Any())
@@ -48,8 +49,6 @@ namespace GestionDrivApi.Data
             }
 
 
-
-
             Product pd1, pd2, pd3, pd4, pd5, pd6, pd7;
             pd1 = pd2 = pd3 = pd4 = pd5 = pd6 = pd7 = null;
             if (!context.Products.Any())
@@ -61,7 +60,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd2 = new Product
                 {
@@ -70,7 +68,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd3 = new Product
                 {
@@ -79,7 +76,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd4 = new Product
                 {
@@ -88,7 +84,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c5.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd5 = new Product
                 {
@@ -97,7 +92,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c4.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd6 = new Product
                 {
@@ -106,7 +100,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c6.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd7 = new Product
                 {
@@ -115,7 +108,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c7.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 IEnumerable<Product> products = new List<Product>()
                 {
@@ -123,8 +115,6 @@ namespace GestionDrivApi.Data
                 };
                 await context.AddRangeAsync(products);
             }
-
-
 
 
             Unit u1, u2, u3, u4, u5, u6, u7;
