@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <MDBFooter
       bgColor="light"
-      className="text-center text-lg-start text-muted fixed-bottom"
+      className="text-center text-lg-start text-muted static-bottom"
     >
       <section className="justify-content-center justify-content-lg-between p-2 border-top">
         <div className="row mt-0">

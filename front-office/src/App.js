@@ -7,14 +7,15 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import tmpData from "./assets/tmpData";
+import { MDBContainer } from "mdb-react-ui-kit";
 
 export default function App() {
   const { products } = tmpData;
   return (
-    <div className="body">
+    <div>
       <BrowserRouter>
         <Navbar />
-        <main>
+        <main className="body gradient-custom-frontoffice full-height">
           <Routes>
             <Route path="/" element={<Home productsList={products} />} />
             <Route
@@ -25,8 +26,8 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }

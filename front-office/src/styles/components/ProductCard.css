@@ -1,0 +1,19 @@
+.card-image-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  height: 10rem;
+  border: solid var(--color-1);
+  border-radius: 5rem;
+  opacity: 1;
+}
+
+.card-image-border:hover {
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+.card-image {
+  border-radius: 1rem;
+}

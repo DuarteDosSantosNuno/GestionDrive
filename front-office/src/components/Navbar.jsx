@@ -29,7 +29,9 @@ export default function Navbar() {
         >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
-        <MDBNavbarBrand href="/">MomoDrive</MDBNavbarBrand>
+        <MDBNavbarBrand href="/" className="brand-main">
+          MomoDrive
+        </MDBNavbarBrand>
         <MDBCollapse navbar show={showNavNoTogglerThird}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>

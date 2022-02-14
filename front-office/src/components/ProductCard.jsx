@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -10,17 +10,28 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function ProductCard(props) {
+  const [product, setProduct] = useState(props.product);
   return (
-    <MDBCard className="h-100" style={{ maxWidth: "16rem" }}>
-      <MDBCardImage src={props.img} alt="..." position="top" fluid />
+    <MDBCard className="h-100 shadow-custom p-4" style={{ maxWidth: "16rem" }}>
+      <div className="d-flex align-items-center justify-content-center">
+        <div className="card-image-border">
+          <MDBCardImage
+            src={product.picture}
+            alt="..."
+            position="top"
+            style={{ maxWidth: "7rem" }}
+            className="card-image"
+            fluid
+          />
+        </div>
+      </div>
       <MDBCardBody>
-        <MDBCardTitle>{props.name}</MDBCardTitle>
-        <MDBCardText>{props.text}</MDBCardText>
-        <MDBBtn href="#">{props.btn}</MDBBtn>{" "}
+        <MDBCardTitle>{product.name}</MDBCardTitle>
+        <p className="text-muted">{product.price} €/piece</p>
+        <div className="d-flex align-items-center justify-content-center">
+          <MDBBtn href="#">{props.btn}</MDBBtn>
+        </div>
       </MDBCardBody>
-      <MDBCardFooter>
-        <small className="text-muted">{props.price} €/piece</small>
-      </MDBCardFooter>
     </MDBCard>
   );
 }
