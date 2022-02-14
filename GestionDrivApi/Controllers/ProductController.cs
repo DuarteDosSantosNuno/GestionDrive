@@ -2,6 +2,7 @@
 using GestionDrivApi.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace GestionDrivApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]  
+    [Route("api/v1/[controller]")]
     public class ProductController : Controller
     {
         private ProductRepository _productRepository;
@@ -155,6 +156,75 @@ namespace GestionDrivApi.Controllers
             }
         }
 
+        [HttpPost("UploadProductImage")]
+        [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
+        public async Task<IActionResult> UploadProductImage(int? idProduct, IFormFile file)
+        {
+            try
+            {
+                OkObjectResult uploadResult = new OkObjectResult(await _productRepository.UploadProductImage(idProduct, file));
+                if (uploadResult.Value is false)
+                    return BadRequest("Upload fail!");
+                else
+                    return uploadResult;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
+        [HttpGet("GetListProductImage")]
+        public async Task<IActionResult> GetListProductImage(int idProduct)
+        {
+            try
+            {
+                List<ProductImage> images = await _productRepository.FindProductImageByIdProduct(idProduct);
+                if (images.Count == 0)
+                    return NotFound();
+
+                return Ok(images);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("DownloadProductImage")]
+        public async Task<IActionResult> DownloadProductImage(int id)
+        {
+            try
+            {
+                ProductImage image = await _productRepository.FindProductImageById(id);
+                if (image == null)
+                    return NotFound();
+
+                byte[] photo = System.IO.File.ReadAllBytes($"{image.Src}");
+                return File(photo, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("DeleteProductImage")]
+        public async Task<IActionResult> DeleteProductImageById(int id)
+        {
+            try
+            {
+                OkObjectResult deleteResult = new OkObjectResult(await _productRepository.DeleteProductImageById(id));
+                if (deleteResult.Value is false)
+                    return NotFound();
+                else
+                    return deleteResult;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
     }
 }
