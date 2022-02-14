@@ -4,7 +4,7 @@ import Modal from "../components/Modal";
 export default function Checkout() {
   return (
     <>
-      <MDBContainer breakpoint="md">
+      <MDBContainer d-flex flex-column>
         <MDBRow>
           <MDBCol center>
             <h1>Pickup time</h1>

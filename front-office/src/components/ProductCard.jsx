@@ -11,8 +11,8 @@ import {
 
 export default function ProductCard(props) {
   return (
-    <MDBCard className="h-100" style={{ maxWidth: "22rem" }}>
-      <MDBCardImage src={props.img} alt="..." position="top" />
+    <MDBCard className="h-100" style={{ maxWidth: "16rem" }}>
+      <MDBCardImage src={props.img} alt="..." position="top" fluid />
       <MDBCardBody>
         <MDBCardTitle>{props.name}</MDBCardTitle>
         <MDBCardText>{props.text}</MDBCardText>

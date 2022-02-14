@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { MDBContainer } from "mdb-react-ui-kit";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
@@ -12,7 +11,7 @@ import tmpData from "./assets/tmpData";
 export default function App() {
   const { products } = tmpData;
   return (
-    <MDBContainer breakpoint="md">
+    <div className="body">
       <BrowserRouter>
         <Navbar />
         <main>
@@ -20,7 +19,7 @@ export default function App() {
             <Route path="/" element={<Home productsList={products} />} />
             <Route
               path="/Order"
-              element={<Order productsList={products[5]} />}
+              element={<Order productsList={products[1]} />}
             />
             <Route path="/Checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
@@ -28,6 +27,6 @@ export default function App() {
         </main>
         <Footer />
       </BrowserRouter>
-    </MDBContainer>
+    </div>
   );
 }

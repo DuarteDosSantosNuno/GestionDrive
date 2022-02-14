@@ -1,14 +1,14 @@
-import { MDBCol, MDBRow } from "mdb-react-ui-kit";
-import ProductCard from "../components/ProductCard";
+import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
+import ProductCardCart from "../components/ProductCardCart";
 
 export default function Order(props) {
   console.log(props);
   return (
-    <div>
+    <MDBContainer d-flex flex-column>
       <h1>My order</h1>
-      <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+      <MDBRow className="row-cols-1 ">
         <MDBCol>
-          <ProductCard
+          <ProductCardCart
             name={props.productsList.name}
             img={props.productsList.picture}
             text={props.productsList.description}
@@ -17,6 +17,6 @@ export default function Order(props) {
           />
         </MDBCol>
       </MDBRow>
-    </div>
+    </MDBContainer>
   );
 }
