@@ -24,7 +24,10 @@ namespace GestionDrivApi.Repositories
 
         public async Task<List<Product>> FindAll()
         {
-            List<Product> products = await _applicationContext.Products.ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                                    .Include(p => p.Category)
+                                    .Include(p => p.Category.Rayon)
+                                    .ToListAsync();
             return products;
         }
 
@@ -42,7 +45,9 @@ namespace GestionDrivApi.Repositories
 
         public async Task<List<Product>> FindByCategory(int categoryId)
         {
-            List<Product> products = await _applicationContext.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                .Where(p => p.Category.Id == categoryId)
+                .ToListAsync();
             return products;
         }
 
@@ -59,7 +64,7 @@ namespace GestionDrivApi.Repositories
             product.Nom = newProduct.Nom;
             product.Description = newProduct.Description;
             product.QuantityStock = newProduct.QuantityStock;
-            product.CategoryId = newProduct.CategoryId;
+            product.Category = newProduct.Category;
             product.Disponible = newProduct.Disponible;
 
             _applicationContext.Products.Add(product);
@@ -77,7 +82,7 @@ namespace GestionDrivApi.Repositories
             product.Nom = newProduct.Nom;
             product.Description = newProduct.Description;
             product.QuantityStock = newProduct.QuantityStock;
-            product.CategoryId = newProduct.CategoryId;
+            product.Category = newProduct.Category;
             product.Disponible = newProduct.Disponible;
 
             _applicationContext.SaveChanges();
@@ -106,8 +111,8 @@ namespace GestionDrivApi.Repositories
 
                 if (!Directory.Exists(filePath))
                     Directory.CreateDirectory(filePath);            
-
-                string fileName = "Product"+idProduct+"."+file.FileName;
+          
+                string fileName = "Product"+idProduct+"."+ Path.GetFileNameWithoutExtension(file.FileName);
                 filePath = Path.Combine(filePath, $"{fileName}{Path.GetExtension(file.FileName)}");
                 using var stream = new FileStream(filePath, FileMode.OpenOrCreate);
                 await file.CopyToAsync(stream);

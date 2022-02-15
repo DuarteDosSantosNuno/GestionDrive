@@ -1,4 +1,5 @@
-﻿using GestionDrivApi.Entities;
+﻿using GestionDrivApi.Dto;
+using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,12 @@ namespace GestionDrivApi.Controllers
     public class ProductController : Controller
     {
         private ProductRepository _productRepository;
+        private UnitRepository _unitRepository;
 
-        public ProductController(ProductRepository productRepository)
+        public ProductController(ProductRepository productRepository,UnitRepository unitRepository)
         {
             _productRepository = productRepository;
+            _unitRepository = unitRepository;
         }
 
         [HttpGet("")]
@@ -26,10 +29,49 @@ namespace GestionDrivApi.Controllers
             try
             {
                 List<Product> listeProduct = await _productRepository.FindAll();
+                List<ProductDto> productDto = new List<ProductDto>();
+        
                 if (listeProduct == null)
                     return NotFound();
                 else
-                    return Ok(listeProduct);
+                {
+                    foreach(var product in listeProduct)
+                    {
+                        List<ProductImage> images = await _productRepository.FindProductImageByIdProduct(product.Id);
+                        List<Unit> units = await _unitRepository.FindByIdProduct(product.Id);
+                        if(units.Count > 0)
+                        {
+                           foreach(var u in units)
+                           {
+                                u.Product = null;
+                           }
+                        }
+
+                        if(images.Count > 0)
+                        {
+                            foreach(var i in images)
+                            {
+                                i.Product = null;
+                                i.Src = i.Src.Split("GestionDrivApi")[1];
+                            }
+                        }
+                        
+                        productDto.Add
+                        (
+                            new ProductDto{
+                                Id = product.Id,
+                                Nom = product.Nom,
+                                Description = product.Description,
+                                QuantityStock = product.QuantityStock,
+                                Category = product.Category,
+                                Disponible = product.Disponible,
+                                ProductImages = images,
+                                Units = units
+                            }
+                        );
+                    }
+                }
+                return Ok(productDto);
             }
             catch (Exception e)
             {

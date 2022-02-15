@@ -8,14 +8,17 @@ import {
   MDBCardFooter,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { BASE_IMAGE_URL } from "./../APIConfig";
 
 export default function ProductCard(props) {
   const [product, setProduct] = useState(props.product);
+  console.log(product);
+  
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
       <div className="d-flex align-items-center justify-content-center">
         <MDBCardImage
-          src={product.picture}
+          src={`${BASE_IMAGE_URL}${product.productImages[0].src}`}
           alt="..."
           position="top"
           style={{ maxWidth: "7rem" }}
@@ -24,8 +27,8 @@ export default function ProductCard(props) {
         />
       </div>
       <MDBCardBody>
-        <MDBCardTitle>{product.name}</MDBCardTitle>
-        <p className="text-muted">{product.price} €/piece</p>
+        <MDBCardTitle>{product.nom}</MDBCardTitle>
+        <p className="text-muted">{product.units[0].prix} €/piece</p>
         <div className="d-flex align-items-center justify-content-center">
           <MDBBtn href="#">{props.btn}</MDBBtn>
         </div>
