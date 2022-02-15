@@ -8,7 +8,7 @@ export default function Home(props) {
   return (
     <MDBContainer d-flex flex-column h-100>
       <h1>Products</h1>
-      <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+      <MDBRow className="row-cols-1 row-cols-md-4 g-4">
         {products.map((p) => (
           <MDBCol>
             <ProductCard

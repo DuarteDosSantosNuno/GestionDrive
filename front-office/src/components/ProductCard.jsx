@@ -12,18 +12,16 @@ import {
 export default function ProductCard(props) {
   const [product, setProduct] = useState(props.product);
   return (
-    <MDBCard className="h-100 shadow-custom p-4" style={{ maxWidth: "16rem" }}>
+    <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
       <div className="d-flex align-items-center justify-content-center">
-        <div className="card-image-border">
-          <MDBCardImage
-            src={product.picture}
-            alt="..."
-            position="top"
-            style={{ maxWidth: "7rem" }}
-            className="card-image"
-            fluid
-          />
-        </div>
+        <MDBCardImage
+          src={product.picture}
+          alt="..."
+          position="top"
+          style={{ maxWidth: "7rem" }}
+          className="card-image"
+          fluid
+        />
       </div>
       <MDBCardBody>
         <MDBCardTitle>{product.name}</MDBCardTitle>
