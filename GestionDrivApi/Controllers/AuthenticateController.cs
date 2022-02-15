@@ -57,15 +57,22 @@ namespace authentication.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-                var token = GetToken(authClaims);
+                string token = GenerateToken(authClaims);
 
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                await _userManager.SetAuthenticationTokenAsync(user, "Jwt Bearer", "JWT", token);
+
+                //user.Token = token;
+
+                return Ok(
+                    user
+                //new
+                //{
+                //    token = new JwtSecurityTokenHandler().WriteToken(token), 
+                //    expiration = token.ValidTo
+                //}
+                );
             }
-            return Unauthorized();
+            return NotFound();
         }
 
         [HttpPost]
@@ -251,19 +258,43 @@ namespace authentication.Controllers
             return (List<string>) await _userManager.GetRolesAsync(FindById(id));
         }
 
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        [HttpPost]
+        [Route("gettoken/{id}")]
+        public async Task<string> GetToken(string id)
+        {
+            Personne user = FindById(id);
+
+            return  await _userManager.GetAuthenticationTokenAsync(user, "Jwt Bearer", "JWT");
+        }
+
+        private string GenerateToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-            var token = new JwtSecurityToken(
+            //var token = new JwtSecurityToken(
+            //    //issuer: _configuration["JWT:ValidIssuer"],
+            //    //audience: _configuration["JWT:ValidAudience"],
+            //    expires: DateTime.Now.AddHours(3),
+            //    claims: authClaims,
+            //    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            //    );
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                //Audience: _configuration["JWT:ValidAudience"],
+                Expires = DateTime.UtcNow.AddHours(6),
                 //issuer: _configuration["JWT:ValidIssuer"],
-                //audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
+                SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256),
+                Subject = new ClaimsIdentity(authClaims),
+            };
+
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken = jwtTokenHandler.CreateToken(tokenDescriptor);
+
+            string token = jwtTokenHandler.WriteToken(securityToken);
 
             return token;
+
         }
     }
 }

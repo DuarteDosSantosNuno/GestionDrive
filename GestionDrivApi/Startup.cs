@@ -96,18 +96,18 @@ namespace GestionDrivApi
             app.UseAuthorization();
             app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "Src")),
-                RequestPath = "/src"
-            });
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-            Path.Combine(env.ContentRootPath, "Src")),
-                RequestPath = "/src"
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(env.ContentRootPath, "Src")),
+            //    RequestPath = "/src"
+            //});
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //Path.Combine(env.ContentRootPath, "Src")),
+            //    RequestPath = "/src"
+            //});
 
             app.UseEndpoints(endpoints =>
             {
