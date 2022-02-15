@@ -11,8 +11,7 @@ import {
 import { BASE_IMAGE_URL } from "./../APIConfig";
 
 export default function ProductCard(props) {
-  const [product, setProduct] = useState(props.product);
-  console.log(product);
+  const { product, onAdd } = props;
   
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>

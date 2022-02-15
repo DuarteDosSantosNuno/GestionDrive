@@ -33,7 +33,7 @@ export default function App() {
           <Routes>
             <Route
               path="/"
-              element={<Home productsList={products} onAdd={onAddProduct} />}
+              element={<Home onAdd={onAddProduct} />}
             />
             <Route
               path="/Order"
@@ -41,7 +41,6 @@ export default function App() {
             />
             <Route path="/Checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/popo" element={<PP />} />
           </Routes>
         </main>
       </BrowserRouter>
