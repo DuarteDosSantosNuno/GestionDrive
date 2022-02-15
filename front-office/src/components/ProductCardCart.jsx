@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBCol,
   MDBRow,
   MDBCard,
   MDBCardBody,
   MDBCardTitle,
-  MDBCardText,
   MDBCardImage,
   MDBBtn,
 } from "mdb-react-ui-kit";
 
 export default function ProductCardCart(props) {
+  const [product, setProduct] = useState(props.product);
+
   return (
-    <MDBCard style={{ maxWidth: "95%" }}>
-      <MDBRow className="g-0">
-        <MDBCol md="4">
+    <MDBCard style={{ maxWidth: "95%" }} className="product-card">
+      <MDBRow>
+        <MDBCol>
           <MDBCardImage
-            src={props.img}
+            src={product.picture}
             alt="..."
-            className="img-fluid rounded-circle"
+            className="img-fluid"
             style={{ maxHeight: "5rem" }}
           />
         </MDBCol>
-        <MDBCol md="8">
-          <MDBCardBody>
-            <MDBCardTitle>{props.name}</MDBCardTitle>
-            <MDBBtn href="#">{props.btn}</MDBBtn>{" "}
-          </MDBCardBody>
+        <MDBCol className="d-flex align-items-center justify-content-left">
+          <MDBCardTitle>{product.name}</MDBCardTitle>
+        </MDBCol>
+        <MDBCol className="d-flex align-items-center justify-content-center">
+          <MDBBtn href="#">{props.btn}</MDBBtn>
         </MDBCol>
       </MDBRow>
     </MDBCard>

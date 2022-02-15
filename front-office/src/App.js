@@ -18,10 +18,7 @@ export default function App() {
         <main className="body gradient-custom-frontoffice full-height">
           <Routes>
             <Route path="/" element={<Home productsList={products} />} />
-            <Route
-              path="/Order"
-              element={<Order productsList={products[1]} />}
-            />
+            <Route path="/Order" element={<Order productsList={products} />} />
             <Route path="/Checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
