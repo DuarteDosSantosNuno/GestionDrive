@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
@@ -8,20 +7,26 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Authentification from "./pages/Authentification";
+import Footer from "./components/Footer";
+import tmpData from "./assets/tmpData";
 
 export default function App() {
+  const { products } = tmpData;
   return (
-    <MDBContainer breakpoint="md">
+    <div>
       <BrowserRouter>
         <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Order" exact component={Order} />
-          <Route path="/Checkout" exact component={Checkout} />
-          <Route path="/Authentification" exact component={Authentification} />
-          <Route component={NotFound} />
-        </Switch>
+        <main className="body gradient-custom-frontoffice full-height">
+          <Routes>
+            <Route path="/" element={<Home productsList={products} />} />
+            <Route path="/Order" element={<Order productsList={products} />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/Authentification" exact component={Authentification} />
+          </Routes>
+        </main>
       </BrowserRouter>
-    </MDBContainer>
+      <Footer />
+    </div>
   );
 }

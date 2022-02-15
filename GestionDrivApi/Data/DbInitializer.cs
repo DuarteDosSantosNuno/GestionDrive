@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GestionDrivApi.Data
 {
-    public static class DbInitializer
-    {
+    public static class DbInitializer 
+    {     
         public async static Task Initialize(ApplicationContext context, RoleManager<IdentityRole> roleManager)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             Rayon r1, r2, r3;
@@ -48,8 +48,6 @@ namespace GestionDrivApi.Data
             }
 
 
-
-
             Product pd1, pd2, pd3, pd4, pd5, pd6, pd7;
             pd1 = pd2 = pd3 = pd4 = pd5 = pd6 = pd7 = null;
             if (!context.Products.Any())
@@ -61,7 +59,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd2 = new Product
                 {
@@ -70,7 +67,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd3 = new Product
                 {
@@ -79,7 +75,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c3.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd4 = new Product
                 {
@@ -88,7 +83,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c5.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd5 = new Product
                 {
@@ -97,7 +91,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c4.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd6 = new Product
                 {
@@ -106,7 +99,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c6.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 pd7 = new Product
                 {
@@ -115,7 +107,6 @@ namespace GestionDrivApi.Data
                     QuantityStock = 100,
                     CategoryId = c7.Id,
                     Disponible = true,
-                    ProductImageSrc = 0,
                 };
                 IEnumerable<Product> products = new List<Product>()
                 {
@@ -123,8 +114,6 @@ namespace GestionDrivApi.Data
                 };
                 await context.AddRangeAsync(products);
             }
-
-
 
 
             Unit u1, u2, u3, u4, u5, u6, u7;
@@ -145,20 +134,18 @@ namespace GestionDrivApi.Data
                 await context.AddRangeAsync(units);
                 await context.SaveChangesAsync();
 
-            }
+		    }
 
-
+               
             if (!roleManager.Roles.Any())
             {
-                IdentityRole user = new IdentityRole("Client");
-                IdentityRole employee = new IdentityRole("Employee");
                 IdentityRole admin = new IdentityRole("Admin");
+                IdentityRole employee = new IdentityRole("Employee");
+                IdentityRole user = new IdentityRole("Client");
 
-                //await context.Cerfas.AddRangeAsync(mesCerfas);
-                //await context.SaveChangesAsync();
-                await roleManager.CreateAsync(user);
                 await roleManager.CreateAsync(admin);
                 await roleManager.CreateAsync(employee);
+                await roleManager.CreateAsync(user);
             }
 
         }

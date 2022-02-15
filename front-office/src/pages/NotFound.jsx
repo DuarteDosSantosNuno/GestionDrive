@@ -1,6 +1,8 @@
+import { MDBContainer } from "mdb-react-ui-kit";
+
 export default function NotFound() {
   return (
-    <>
+    <MDBContainer>
       <h1> 404 - Page not found</h1>
       <p className="input">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ad
@@ -10,6 +12,6 @@ export default function NotFound() {
         minus, debitis a beatae architecto, error aspernatur sequi officia
         corrupti minima reiciendis pariatur sint soluta.
       </p>
-    </>
+    </MDBContainer>
   );
 }

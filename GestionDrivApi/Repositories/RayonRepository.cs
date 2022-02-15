@@ -38,11 +38,11 @@ namespace GestionDrivApi.Repositories
             _applicationContext.SaveChanges();
             return true;
         }
-        public async Task<Rayon>  FindById(int id)
+        public async Task<Rayon> FindById(int id)
         {
             try
             {
-                return _applicationContext.Rayons.Single(ra => ra.Id == id);
+                return await _applicationContext.Rayons.SingleAsync(ra => ra.Id == id);
             }
             catch (Exception ex)
             {
