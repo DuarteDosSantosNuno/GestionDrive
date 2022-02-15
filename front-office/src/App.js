@@ -7,7 +7,6 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import tmpData from "./assets/tmpData";
-import { MDBContainer } from "mdb-react-ui-kit";
 
 export default function App() {
   const { products } = tmpData;
