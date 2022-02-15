@@ -30,7 +30,7 @@ export default function ProductCard(props) {
         <MDBCardTitle>{product.nom}</MDBCardTitle>
         <p className="text-muted">{product.units[0].prix} €/piece</p>
         <div className="d-flex align-items-center justify-content-center">
-          <MDBBtn href="#">{props.btn}</MDBBtn>
+          <MDBBtn onClick={onAdd}>{props.btn}</MDBBtn>
         </div>
       </MDBCardBody>
     </MDBCard>
