@@ -10,7 +10,8 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function ProductCard(props) {
-  const [product, setProduct] = useState(props.product);
+  const { product, onAdd } = props;
+
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
       <div className="d-flex align-items-center justify-content-center">
@@ -27,7 +28,7 @@ export default function ProductCard(props) {
         <MDBCardTitle>{product.name}</MDBCardTitle>
         <p className="text-muted">{product.price} €/piece</p>
         <div className="d-flex align-items-center justify-content-center">
-          <MDBBtn href="#">{props.btn}</MDBBtn>
+          <MDBBtn onClick={onAdd}>{props.btn}</MDBBtn>
         </div>
       </MDBCardBody>
     </MDBCard>

@@ -4,7 +4,7 @@ import ProductCardCart from "../components/ProductCardCart";
 import Cart from "../components/Cart";
 
 export default function Order(props) {
-  const [products, setProducts] = useState(props.productsList);
+  const { cartItems } = props;
 
   console.log(props);
   return (
@@ -13,11 +13,11 @@ export default function Order(props) {
       <MDBRow>
         <MDBCol className="col-9">
           <MDBRow className="row-cols-1 g-2">
-            {products.map((p) => (
+            {cartItems.map((c) => (
               <MDBCol>
                 <ProductCardCart
-                  key={p.id}
-                  product={p}
+                  key={c.id}
+                  product={c}
                   btn={"Remove from Cart"}
                 />
               </MDBCol>
@@ -25,7 +25,7 @@ export default function Order(props) {
           </MDBRow>
         </MDBCol>
         <MDBCol className="col-3">
-          <Cart />
+          <Cart products={cartItems} />
         </MDBCol>
       </MDBRow>
     </MDBContainer>

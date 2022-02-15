@@ -15,7 +15,7 @@ export default function ProductCardCart(props) {
   return (
     <MDBCard style={{ maxWidth: "95%" }} className="product-card">
       <MDBRow>
-        <MDBCol>
+        <MDBCol className="col-2">
           <MDBCardImage
             src={product.picture}
             alt="..."
@@ -23,10 +23,10 @@ export default function ProductCardCart(props) {
             style={{ maxHeight: "4.5rem" }}
           />
         </MDBCol>
-        <MDBCol className="d-flex align-items-center justify-content-left">
+        <MDBCol className="col-6 d-flex align-items-center justify-content-left">
           <MDBCardTitle>{product.name}</MDBCardTitle>
         </MDBCol>
-        <MDBCol className="d-flex align-items-center justify-content-center">
+        <MDBCol className="col-4 d-flex align-items-center justify-content-center">
           <MDBBtn href="#">{props.btn}</MDBBtn>
         </MDBCol>
       </MDBRow>

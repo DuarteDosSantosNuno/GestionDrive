@@ -14,7 +14,7 @@ export default function Checkout() {
         <MDBRow>
           <MDBCol center>
             <h1>Checkout</h1>
-            <Modal bodyText="OK to proceed to checkout, cancel to go back to your cart" />
+            <Modal bodyText="OK to proceed to checkout, cancel to go back to the pickup schedule" />
           </MDBCol>
         </MDBRow>
       </MDBContainer>
