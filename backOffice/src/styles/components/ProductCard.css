@@ -1,0 +1,29 @@
+.product-card {
+  padding: 0;
+}
+
+div .card-body {
+  flex: 1 1 auto;
+  padding: 0.5rem 1rem;
+}
+
+.card-image-border:hover {
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+.card-image {
+  padding-top: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* .card-image-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  height: 10rem;
+  border: solid var(--color-1);
+  border-radius: 5rem;
+  opacity: 1;
+} */

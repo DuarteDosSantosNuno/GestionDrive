@@ -1,62 +1,39 @@
-import React, { Component, Fragment } from "react";
-// import { connect } from "react-redux";
-// import { Router } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
+//import tmpData from "./assets/tmpData";
 
-//import BoardUser from "./components/board-user.component";
-//import BoardModerator from "./components/board-moderator.component";
-//import BoardAdmin from "./components/board-admin.component";
-// import { logout } from "./actions/auth";
-// import { clearMessage } from "./actions/message";
-import { history } from "./helpers/history";
-import Myroutes from "./components/routes";
+export default function App() {
+  const { products } = [];
+  const [cartItems, setCartItems] = useState(products);
 
-class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.logOut = this.logOut.bind(this);
-  //   this.state = {
-  //     showModeratorBoard: false,
-  //     showAdminBoard: false,
-  //     currentUser: undefined,
-  //   };
-  //   history.listen((location) => {
-  //     props.dispatch(clearMessage()); // clear message when changing location
-  //   });
-  // }
+  const onAddProduct = (product) => {
+    const exist = cartItems.find((p) => p.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((i) =>
+          i.id === product.id ? { ...exist, qty: exist.qty + 1 } : i
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
 
-  // componentDidMount() {
-  //   const user = this.props.user;
-  //   if (user) {
-  //     this.setState({
-  //       currentUser: user,
-  //       showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-  //       showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-  //     });
-  //   }
-  // }
-
-  // logOut() {
-  //   this.props.dispatch(logout());
-  // }
-
-  render() {
-    //const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-    return (
-      <Fragment history={history}>
-        <Myroutes />
-      </Fragment>
-    );
-  }
+  return (
+    <div>
+      <BrowserRouter>
+        <main className="body full-height">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
+      <Footer />
+    </div>
+  );
 }
-
-// function mapStateToProps(state) {
-//   const { user } = state.auth;
-//   return {
-//     user,
-//   };
-// }
-
-//export default connect(mapStateToProps)(App);
-export default App;
