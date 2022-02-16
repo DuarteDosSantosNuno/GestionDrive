@@ -17,6 +17,18 @@ div .card-body {
   border-radius: 0.5rem;
 }
 
+.product-card-name {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+.product-card-text {
+  text-align: center;
+  color: black;
+  margin: 0;
+}
+
 /* .card-image-border {
   display: flex;
   align-items: center;

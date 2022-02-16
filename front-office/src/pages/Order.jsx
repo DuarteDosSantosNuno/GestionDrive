@@ -4,9 +4,8 @@ import ProductCardCart from "../components/ProductCardCart";
 import Cart from "../components/Cart";
 
 export default function Order(props) {
-  const { cartItems } = props;
+  const { cartItems, onAdd, onRemove } = props;
 
-  console.log(props);
   return (
     <MDBContainer d-flex flex-column>
       <h1>My order</h1>
@@ -18,7 +17,8 @@ export default function Order(props) {
                 <ProductCardCart
                   key={c.id}
                   product={c}
-                  btn={"Remove from Cart"}
+                  onRemove={onRemove}
+                  onAdd={onAdd}
                 />
               </MDBCol>
             ))}

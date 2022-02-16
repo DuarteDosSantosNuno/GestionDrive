@@ -10,7 +10,7 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function ProductCardCart(props) {
-  const [product, setProduct] = useState(props.product);
+  const { product, onAdd, onRemove } = props;
 
   return (
     <MDBCard style={{ maxWidth: "95%" }} className="product-card">
@@ -26,8 +26,14 @@ export default function ProductCardCart(props) {
         <MDBCol className="col-6 d-flex align-items-center justify-content-left">
           <MDBCardTitle>{product.name}</MDBCardTitle>
         </MDBCol>
-        <MDBCol className="col-4 d-flex align-items-center justify-content-center">
-          <MDBBtn href="#">{props.btn}</MDBBtn>
+        <MDBCol className="col-4 d-flex align-items-center justify-content-evenly">
+          <a role="button" onClick={() => onRemove(product)}>
+            <i className="fas fa-minus productcardcart-button-remove"></i>{" "}
+          </a>
+          <span>{product.qty}</span>
+          <a role="button" onClick={() => onAdd(product)}>
+            <i className="fas fa-plus productcardcart-button-add"></i>
+          </a>
         </MDBCol>
       </MDBRow>
     </MDBCard>

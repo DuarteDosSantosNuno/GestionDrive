@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -11,6 +11,12 @@ import {
 
 export default function ProductCard(props) {
   const { product, onAdd } = props;
+  const [buttonQty, setButtonQty] = useState(product.qty ? false : true);
+
+  useEffect(() => {
+    console.log("useEffect setButtonQty = " + buttonQty);
+    setButtonQty(product.qty > 0 ? true : false);
+  }, []);
 
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
@@ -25,10 +31,32 @@ export default function ProductCard(props) {
         />
       </div>
       <MDBCardBody>
-        <MDBCardTitle>{product.name}</MDBCardTitle>
-        <p className="text-muted">{product.price} €/piece</p>
+        <MDBCardTitle className="product-card-name">
+          {product.name}
+        </MDBCardTitle>
+        <p className="product-card-text">{product.price} €/piece</p>
         <div className="d-flex align-items-center justify-content-center">
-          <MDBBtn onClick={onAdd}>{props.btn}</MDBBtn>
+          {!buttonQty ? (
+            <MDBBtn onClick={() => onAdd(product)}>{props.btn}</MDBBtn>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => onRemove(product)}
+                className="btn btn-outline-danger btn-floating"
+              >
+                <i className="fas fa-minus"></i>{" "}
+              </button>
+              <span>{product.qty}</span>
+              <button
+                type="button"
+                onClick={() => onAdd(product)}
+                className="btn btn-outline-success btn-floating"
+              >
+                <i className="fas fa-plus"></i>
+              </button>
+            </>
+          )}
         </div>
       </MDBCardBody>
     </MDBCard>

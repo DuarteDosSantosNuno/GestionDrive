@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MDBBadge, MDBIcon } from "mdb-react-ui-kit";
 
 export default function CartCounter(props) {
-  const [count, setCount] = useState(props.counter);
+  const { nbCartItems } = props;
 
   return (
     <>
-      {count > 0 ? (
+      {nbCartItems > 0 ? (
         <MDBBadge pill color="danger">
-          {count}
+          {nbCartItems}
         </MDBBadge>
       ) : (
         <></>

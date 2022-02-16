@@ -9,20 +9,18 @@ import {
   MDBCollapse,
   MDBNavbarNav,
   MDBIcon,
-  MDBBadge,
 } from "mdb-react-ui-kit";
 import CartCounter from "./CartCounter";
 
 export default function Navbar(props) {
   const [showNavNoTogglerThird, setShowNavNoTogglerThird] = useState(false);
+  const { nbCartItems } = props;
 
   return (
-    <MDBNavbar expand="lg" sticky light bgColor="light">
+    <MDBNavbar expand="md" sticky light bgColor="light">
       <MDBContainer fluid>
         <MDBNavbarToggler
           type="button"
-          data-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
           aria-expanded="false"
           aria-label="Toggle navigation"
           onClick={() => setShowNavNoTogglerThird(!showNavNoTogglerThird)}
@@ -33,7 +31,7 @@ export default function Navbar(props) {
           MomoDrive
         </MDBNavbarBrand>
         <MDBCollapse navbar show={showNavNoTogglerThird}>
-          <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
+          <MDBNavbarNav className="mr-auto mb-0 mb-lg-0">
             <MDBNavbarItem>
               <MDBNavbarLink active aria-current="home" href="/">
                 Products
@@ -41,7 +39,7 @@ export default function Navbar(props) {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/Order">
-                <CartCounter counter={props.nbCartItems} />
+                <CartCounter nbCartItems={nbCartItems} />
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
