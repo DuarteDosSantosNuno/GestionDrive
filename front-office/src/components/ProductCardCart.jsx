@@ -3,28 +3,32 @@ import {
   MDBCol,
   MDBRow,
   MDBCard,
-  MDBCardBody,
   MDBCardTitle,
   MDBCardImage,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { BASE_IMAGE_URL } from "./../APIConfig";
 
 export default function ProductCardCart(props) {
   const { product, onAdd, onRemove } = props;
+
+  let pathImage;
+  if (product.productImages.length === 0) pathImage = "./tmp/img/noimage.png";
+  else pathImage = BASE_IMAGE_URL + product.productImages[0].src;
 
   return (
     <MDBCard style={{ maxWidth: "95%" }} className="product-card">
       <MDBRow>
         <MDBCol className="col-2">
           <MDBCardImage
-            src={product.picture}
+            src={pathImage}
             alt="..."
             className="img-fluid p-2"
             style={{ maxHeight: "4.5rem" }}
           />
         </MDBCol>
         <MDBCol className="col-6 d-flex align-items-center justify-content-left">
-          <MDBCardTitle>{product.name}</MDBCardTitle>
+          <MDBCardTitle>{product.nom}</MDBCardTitle>
         </MDBCol>
         <MDBCol className="col-4 d-flex align-items-center justify-content-evenly">
           <a role="button" onClick={() => onRemove(product)}>

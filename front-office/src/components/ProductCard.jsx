@@ -8,6 +8,7 @@ import {
   MDBCardFooter,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { BASE_IMAGE_URL } from "./../APIConfig";
 
 export default function ProductCard(props) {
   const { product, onAdd } = props;
@@ -17,12 +18,17 @@ export default function ProductCard(props) {
     console.log("useEffect setButtonQty = " + buttonQty);
     setButtonQty(product.qty > 0 ? true : false);
   }, []);
+  let pathImage;
+
+  if (product.productImages.length === 0) pathImage = "./tmp/img/noimage.png";
+  else pathImage = BASE_IMAGE_URL + product.productImages[0].src;
 
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
       <div className="d-flex align-items-center justify-content-center">
         <MDBCardImage
-          src={product.picture}
+          //src={a ? `${BASE_IMAGE_URL}${product.productImages[0].src}` : `${img}`}
+          src={pathImage}
           alt="..."
           position="top"
           style={{ maxWidth: "7rem" }}
@@ -31,10 +37,10 @@ export default function ProductCard(props) {
         />
       </div>
       <MDBCardBody>
-        <MDBCardTitle className="product-card-name">
-          {product.name}
-        </MDBCardTitle>
-        <p className="product-card-text">{product.price} €/piece</p>
+        <MDBCardTitle className="product-card-name">{product.nom}</MDBCardTitle>
+        <p className="product-card-text">
+          {product.units[0].prix} €/{product.units[0].unite}
+        </p>
         <div className="d-flex align-items-center justify-content-center">
           {!buttonQty ? (
             <MDBBtn onClick={() => onAdd(product)}>{props.btn}</MDBBtn>

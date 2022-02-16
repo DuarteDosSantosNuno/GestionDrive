@@ -32,6 +32,11 @@ namespace GestionDrivApi.Repositories
                 return _applicationContext.Units.Single(unit => unit.Id == id);       
         }
 
+        public async Task<List<Unit>> FindByIdProduct(int idProduct)
+        {
+            return await _applicationContext.Units.Where(unit => unit.Product.Id == idProduct).ToListAsync();
+        }
+
         public bool Exists(string unit)
         {
             return FindByUnit(unit) != null;
