@@ -1,59 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from "react";
+// import { connect } from "react-redux";
+// import { Router } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-export default class App extends Component {
-    static displayName = App.name;
+//import BoardUser from "./components/board-user.component";
+//import BoardModerator from "./components/board-moderator.component";
+//import BoardAdmin from "./components/board-admin.component";
+// import { logout } from "./actions/auth";
+// import { clearMessage } from "./actions/message";
+import { history } from "./helpers/history";
+import Myroutes from "./components/routes";
 
-    constructor(props) {
-        super(props);
-        this.state = { forecasts: [], loading: true };
-    }
+class App extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.logOut = this.logOut.bind(this);
+  //   this.state = {
+  //     showModeratorBoard: false,
+  //     showAdminBoard: false,
+  //     currentUser: undefined,
+  //   };
+  //   history.listen((location) => {
+  //     props.dispatch(clearMessage()); // clear message when changing location
+  //   });
+  // }
 
-    componentDidMount() {
-        this.populateWeatherData();
-    }
+  // componentDidMount() {
+  //   const user = this.props.user;
+  //   if (user) {
+  //     this.setState({
+  //       currentUser: user,
+  //       showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+  //       showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+  //     });
+  //   }
+  // }
 
-    static renderForecastsTable(forecasts) {
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forecasts.map(forecast =>
-                        <tr key={forecast.date}>
-                            <td>{forecast.date}</td>
-                            <td>{forecast.temperatureC}</td>
-                            <td>{forecast.temperatureF}</td>
-                            <td>{forecast.summary}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
-    }
+  // logOut() {
+  //   this.props.dispatch(logout());
+  // }
 
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-            : App.renderForecastsTable(this.state.forecasts);
-
-        return (
-            <div>
-                <h1 id="tabelLabel" >Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-                {contents}
-            </div>
-        );
-    }
-
-    async populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        this.setState({ forecasts: data, loading: false });
-    }
+  render() {
+    //const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    return (
+      <Fragment history={history}>
+        <Myroutes />
+      </Fragment>
+    );
+  }
 }
+
+// function mapStateToProps(state) {
+//   const { user } = state.auth;
+//   return {
+//     user,
+//   };
+// }
+
+//export default connect(mapStateToProps)(App);
+export default App;
