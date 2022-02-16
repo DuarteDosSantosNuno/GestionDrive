@@ -9,12 +9,12 @@ import {
 import * as URL from "../APIConfig";
 
 export default function UserCard(props) {
-  const { User } = props;
+  const { user } = props;
   
   return (
     <MDBCard className="h-100 shadow-custom" style={{ maxWidth: "16rem" }}>
       <MDBCardBody>
-        <MDBCardTitle>{User.email}</MDBCardTitle>
+        <MDBCardTitle>{user.email}</MDBCardTitle>
       </MDBCardBody>
     </MDBCard>
   );

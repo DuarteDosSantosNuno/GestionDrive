@@ -40,7 +40,7 @@ export default function Home(props) {
           <MDBCol>
             <UserCard
               key={user.id}
-              User={user}
+              user={user}
             ></UserCard>
           </MDBCol>
         ))}
