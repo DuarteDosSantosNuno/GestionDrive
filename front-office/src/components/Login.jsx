@@ -1,33 +1,60 @@
-import React from 'react';
-import Authentification from '../pages/Authentification';
-import {
-    MDBCard,
-    MDBCardImage,
-    MDBCardBody,
-    MDBCardTitle,
-    MDBCardText,
-    MDBCardFooter,
-    MDBRow,
-    MDBCol,
-} from "mdb-react-ui-kit";
+// import { useFormik } from "formik";
 
-export default class Login extends Component {
-    constructor(props) {
-        let loggedIn = false
-        this.state = {
-            username: '',
-            password: '',
-            loggedIn
-        }
-    }
-    render() {
-        return (
-            <div>
-                <h1>Login</h1>
-            </div>
-        )
-    }
-}
+// function Login() {
+//     const initialValues = {
+//         email: "",
+//         password: "",
+//         gcu: false
+//     };
+
+//     function handleSubmit(formValues) {
+//         console.log("Form values", formValues)
+//     }
+
+//     const formik = useFormik({
+//         initialValues,
+//         onSubmit: handleSubmit,
+//     });
+// }
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import Authentification from '../pages/Authentification';
+// import {
+//     MDBCard,
+//     MDBCardImage,
+//     MDBCardBody,
+//     MDBCardTitle,
+//     MDBCardText,
+//     MDBCardFooter,
+//     MDBRow,
+//     MDBCol,
+// } from "mdb-react-ui-kit";
+
+// export default class Login extends Component {
+//     constructor(props) {
+//         let loggedIn = false
+//         this.state = {
+//             username: '',
+//             password: '',
+//             loggedIn
+//         }
+//     }
+//     render() {
+//         return (
+//             <div>
+//                 <h1>Login</h1>
+//             </div>
+//         )
+//     }
+// }
 
 // const Login = () => {
 
@@ -36,7 +63,7 @@ export default class Login extends Component {
 //     const toggleShow = () => setBasicLogin(!basicLogin);
 
 //     return (
-//         <section className="vh-100 gradient-custom">
+//         <MDBRow className="vh-100 gradient-custom">
 //             <div className="container py-5 h-100">
 //                 <div className="row d-flex justify-content-center align-items-center h-100">
 //                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -89,6 +116,6 @@ export default class Login extends Component {
 //                     </div>
 //                 </div>
 //             </div>
-//         </section>
+//         </MDBRow>
 //     );
 // }
