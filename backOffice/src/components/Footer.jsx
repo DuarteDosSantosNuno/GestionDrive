@@ -1,9 +1,9 @@
 import React from "react";
-import { MDBContainer, MDBFooter, MDBIcon } from "mdb-react-ui-kit";
+import * as MDB from "mdb-react-ui-kit";
 
 export default function Footer() {
   return (
-    <MDBFooter
+    <MDB.MDBFooter
       bgColor="light"
       className="text-center text-lg-start text-muted static-bottom"
     >
@@ -28,6 +28,6 @@ export default function Footer() {
       >
         © (Dynamic Year) Copyright Afpa Roubaix
       </div>
-    </MDBFooter>
+    </MDB.MDBFooter>
   );
 }
