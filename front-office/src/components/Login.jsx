@@ -1,30 +1,66 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBBtn, MDBCardBody, MDBCard, MDBCardTitle, MDBContainer, MDBRow, MDBCol, MDBInput, MDBIcon } from 'mdbreact';
+import { Formik, Form, Field } from 'formik';
+import { UseMDBInput } from "./Authentification";
+//import { MDBInput, MDBSelect, MDBSelectInput, MDBSelectOptions, MDBSelectOption } from 'mdbreact';
 
-const Login = () => {
 
-    // const [basicModal, setBasicModal] = useState(false);
 
-    // const toggleShow = () => setBasicModal(!basicModal);
+
+const FormLogin = ({ submit, initialValues, errorLog, validationShema }) =>
+    <Formik
+        initialValues={initialValues}
+        onSubmit={submit}
+        validationShema={validationShema}
+    >
+        <Formik>
+            <Form>
+                <Field label="Type your email" type="email" name="email" placeholder="login" component={UseMDBInput} errorRight />
+                <Field label="Type your password" type="password" name="password" placeholder="Password" component={UseMDBInput} errorRight />
+                <MDBBtn type="submit" color="succes" className="btn-block">Valider</MDBBtn>
+                {errorLog && <ErrorMessSmall middle message="Login/Password incorrect(s)" />}
+            </Form>
+
+        </Formik>
+    </Formik>
+
+
+
+const Login = (props) => {
 
     return (
-        <MDBContainer>
-            <MDBRow>
-                <MDBCol md="6">
-                    <form>
-                        <p className="h5 text-center mb-4">Sign in</p>
-                        <div className="grey-text">
-                            <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
-                                success="right" />
-                            <MDBInput label="Type your password" icon="lock" group type="password" validate />
-                        </div>
-                        <div className="text-center">
-                            <MDBBtn>Login</MDBBtn>
-                        </div>
-                    </form>
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
+        <MDBCard style={{ width: "22rem" }}>
+            <MDBCardBody>
+                <MDBCardTitle className="text-center">Login</MDBCardTitle>
+
+                <FormLogin {...props} />
+            </MDBCardBody>
+        </MDBCard>
+
+
+        //Ne fonctionne Pas !
+
+        // <MDBContainer>
+        //     <MDBRow>
+        //         <MDBCol md="6">
+        //             <form>
+        //                 <p className="h5 text-center mb-4">Sign in</p>
+        //                 <MDBCardTitle className="text-center">Login</MDBCardTitle>
+        //                 <div className="grey-text">
+        //                     <MDBInput label="Type your email" group type="email" validate error="wrong"
+        //                         success="right" />
+
+        //                     <MDBInput label="Type your password" icon="lock" group type="password" validate />
+        //                 </div>
+        //                 <FormLogin {...props} />
+        //                 <div className="text-center">
+        //                     <MDBBtn
+        //                     >Login</MDBBtn>
+        //                 </div>
+        //             </form>
+        //         </MDBCol>
+        //     </MDBRow>
+        // </MDBContainer>
     );
 };
 

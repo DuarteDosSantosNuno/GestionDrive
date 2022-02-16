@@ -5,11 +5,12 @@ import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
-import Authentification from "./pages/Authentification";
+import Authentification from "./components/Authentification";
 import Footer from "./components/Footer";
 import tmpData from "./assets/tmpData";
 import FormPage from "./components/Login";
-//import Login from "./components/Login";
+import LoginView from "./pages/LoginView";
+import { MDBInput, MDBSelect, MDBSelectInput, MDBSelectOptions, MDBSelectOption } from 'mdbreact';
 
 export default function App() {
   const { products } = tmpData;
@@ -22,8 +23,8 @@ export default function App() {
             <Route path="/" element={<Home productsList={products} />} />
             <Route path="/Order" element={<Order productsList={products} />} />
             <Route path="/Checkout" element={<Checkout />} />
-            <Route path="/FromPage" element={<FormPage />} />
-            <Route path="/Authentification" element={<Authentification />} />
+            <Route path="/FormLogin" element={<FormPage />} />
+            {/* <Route path="/Authentification" element={<FormPage />} /> */}
             <Route path="*" element={<NotFound />} />
 
           </Routes>
