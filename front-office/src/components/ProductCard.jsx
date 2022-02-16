@@ -9,6 +9,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { BASE_IMAGE_URL } from "./../APIConfig";
+import ModalProductDetail from "../components/ModalProductDetail";
 
 export default function ProductCard(props) {
   const { product, onAdd } = props;
@@ -36,8 +37,18 @@ export default function ProductCard(props) {
           fluid
         />
       </div>
-      <MDBCardBody>
-        <MDBCardTitle className="product-card-name">{product.nom}</MDBCardTitle>
+      <MDBCardBody>   
+        <MDBCardTitle className="product-card-name">
+          <ModalProductDetail 
+            bodyText="product detail"
+            product={product} 
+            pathImage={pathImage}
+            onAdd={onAdd}
+            buttonQty={buttonQty}
+            btn={props.btn}
+          />   
+          {product.nom}
+        </MDBCardTitle>
         <p className="product-card-text">
           {product.units[0].prix} €/{product.units[0].unite}
         </p>
