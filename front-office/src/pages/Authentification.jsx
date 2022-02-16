@@ -13,12 +13,13 @@ const Authentification = () => (
             initialValues={{ email: '', password: '' }}
             validate={values => {
                 const errors = {};
+                console.log(values)
                 if (!values.email) {
                     errors.email = 'Email incorrect';
                 } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
-                    errors.email = 'Invalid email address';
+                    errors.email = 'Adresse mail invalide';
                 }
                 return errors;
                 if (!values.password) {
@@ -40,9 +41,9 @@ const Authentification = () => (
         >
 
             {({ values, handleChange, handleSubmit, handleBlur, errors, touched, isSubmitting }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} className="bg-white border p-5 d-flex flex-column">
                     {/* <Login /> */}
-                    <div className="form-group">
+                    <div className="bg-white border p-5 d-flex flex-column">
                         <div className='form-group'>
                             <br></br>
                             <br></br>
