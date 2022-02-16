@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import CartCounter from "./CartCounter";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [showNavNoTogglerThird, setShowNavNoTogglerThird] = useState(false);
 
   return (
@@ -35,13 +35,13 @@ export default function Navbar() {
         <MDBCollapse navbar show={showNavNoTogglerThird}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="/">
+              <MDBNavbarLink active aria-current="home" href="/">
                 Products
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/Order">
-                <CartCounter counter="1" />
+                <CartCounter counter={props.nbCartItems} />
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>

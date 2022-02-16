@@ -1,4 +1,5 @@
-﻿using GestionDrivApi.Entities;
+﻿using GestionDrivApi.Dto;
+using GestionDrivApi.Entities;
 using GestionDrivApi.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,62 @@ namespace GestionDrivApi.Controllers
     public class ProductController : Controller
     {
         private ProductRepository _productRepository;
+        private UnitRepository _unitRepository;
 
-        public ProductController(ProductRepository productRepository)
+        public ProductController(ProductRepository productRepository, UnitRepository unitRepository)
         {
             _productRepository = productRepository;
+            _unitRepository = unitRepository;
+        }
+
+        private async Task<List<ProductDto>> TranformEnDto(List<Product> listeProduct)
+        {
+            try
+            {
+                List<ProductDto> productDto = new List<ProductDto>();
+                foreach (var product in listeProduct)
+                {
+                    List<ProductImage> images = await _productRepository.FindProductImageByIdProduct(product.Id);
+                    List<Unit> units = await _unitRepository.FindByIdProduct(product.Id);
+                    if (units.Count > 0)
+                    {
+                        foreach (var u in units)
+                        {
+                            u.Product = null;
+                        }
+                    }
+
+                    if (images.Count > 0)
+                    {
+                        foreach (var i in images)
+                        {
+                            i.Product = null;
+                            i.Src = i.Src.Split("GestionDrivApi")[1];
+                        }
+                    }
+
+                    productDto.Add
+                    (
+                        new ProductDto
+                        {
+                            Id = product.Id,
+                            Nom = product.Nom,
+                            Description = product.Description,
+                            QuantityStock = product.QuantityStock,
+                            Category = product.Category,
+                            Disponible = product.Disponible,
+                            ProductImages = images,
+                            Units = units
+                        }
+                    );
+
+                }
+                return productDto;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         [HttpGet("")]
@@ -26,10 +79,14 @@ namespace GestionDrivApi.Controllers
             try
             {
                 List<Product> listeProduct = await _productRepository.FindAll();
+                List<ProductDto> productDto = new List<ProductDto>();
+
                 if (listeProduct == null)
                     return NotFound();
                 else
-                    return Ok(listeProduct);
+                    productDto = await TranformEnDto(listeProduct);
+
+                return Ok(productDto);
             }
             catch (Exception e)
             {
@@ -60,10 +117,13 @@ namespace GestionDrivApi.Controllers
             try
             {
                 List<Product> products = await _productRepository.FindByName(name);
+                List<ProductDto> productDto = new List<ProductDto>();
                 if (products == null)
                     return NotFound();
                 else
-                    return Ok(products);
+                    productDto = await TranformEnDto(products);
+                
+                return Ok(productDto);
             }
             catch (Exception e)
             {
@@ -77,10 +137,13 @@ namespace GestionDrivApi.Controllers
             try
             {
                 List<Product> products = await _productRepository.FindByCategory(categoryId);
+                List<ProductDto> productDto = new List<ProductDto>();
                 if (products == null)
                     return NotFound();
                 else
-                    return Ok(products);
+                    productDto = await TranformEnDto(products);
+                
+                return Ok(productDto);
             }
             catch (Exception e)
             {
@@ -94,10 +157,13 @@ namespace GestionDrivApi.Controllers
             try
             {
                 List<Product> products = await _productRepository.FindByAvailability(available);
+                List<ProductDto> productDto = new List<ProductDto>();
                 if (products == null)
                     return NotFound();
                 else
-                    return Ok(products);
+                    productDto = await TranformEnDto(products);
+                
+                return Ok(productDto);
             }
             catch (Exception e)
             {

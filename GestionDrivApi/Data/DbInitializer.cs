@@ -48,6 +48,7 @@ namespace GestionDrivApi.Data
                 await context.AddRangeAsync(categories);
             }
 
+            await context.SaveChangesAsync();
 
             Product pd1, pd2, pd3, pd4, pd5, pd6, pd7;
             pd1 = pd2 = pd3 = pd4 = pd5 = pd6 = pd7 = null;
@@ -58,7 +59,8 @@ namespace GestionDrivApi.Data
                     Nom = "LACTEL : Lait demi-écrémé UHT",
                     Description = "APRÈS OUVERTURE, À CONSERVER AU FROID (6°C MAX) ET À CONSOMMER RAPIDEMENT (SOUS 3 JOURS)",
                     QuantityStock = 100,
-                    CategoryId = c3.Id,
+                    //CategoryId = c3.Id,
+                    Category = c3,
                     Disponible = true,
                 };
                 pd2 = new Product
@@ -66,7 +68,8 @@ namespace GestionDrivApi.Data
                     Nom = "ELLE&VIRE : Crème fraîche épaisse entière 30% M.G",
                     Description = "A CONSERVER AU RÉFRIGÉRATEUR À + 6°C MAXIMUM.APRÈS OUVERTURE SE CONSERVE 15 JOURS DANS DES CONDITIONS NORMALES DE STOCKAGE.",
                     QuantityStock = 100,
-                    CategoryId = c3.Id,
+                    //CategoryId = c1.Id,
+                    Category = c1,
                     Disponible = true,
                 };
                 pd3 = new Product
@@ -74,7 +77,8 @@ namespace GestionDrivApi.Data
                     Nom = "YAOS : Yaourts à la grecque nature",
                     Description = "A CONSERVER AU FRAIS À MAX. +6°C",
                     QuantityStock = 100,
-                    CategoryId = c3.Id,
+                    //CategoryId = c2.Id,
+                    Category = c2,
                     Disponible = true,
                 };
                 pd4 = new Product
@@ -82,7 +86,8 @@ namespace GestionDrivApi.Data
                     Nom = "POMME : Pink Lady",
                     Description = "Pommes Pinkids, ARFUMÉE, CROQUANTE ET SUCRÉE, variété Crisp Pink, calibre 115-150g.",
                     QuantityStock = 100,
-                    CategoryId = c5.Id,
+                    //CategoryId = c5.Id,
+                    Category = c5,
                     Disponible = true,
                 };
                 pd5 = new Product
@@ -90,7 +95,8 @@ namespace GestionDrivApi.Data
                     Nom = "POMME DE TERRE : Pommes de terre de consommation",
                     Description = "Pommes de terre de consommation traité contre la germination, variété Sunita, Challenger / Excellency, catégorie 1, calibre 40-70 mm.",
                     QuantityStock = 100,
-                    CategoryId = c4.Id,
+                    //CategoryId = c4.Id,
+                    Category = c4,
                     Disponible = true,
                 };
                 pd6 = new Product
@@ -98,7 +104,8 @@ namespace GestionDrivApi.Data
                     Nom = "LE GAULOIS : 4 à 5 filets de poulet blanc",
                     Description = "Le Gaulois vous propose des Filets de poulet, prêts en quelques minutes, pour des recettes variées au quotidien.Les poulets Le Gaulois sont garantis 100% français : nés, élevés et préparés en France.",
                     QuantityStock = 100,
-                    CategoryId = c6.Id,
+                    //CategoryId = c6.Id,
+                    Category = c6,
                     Disponible = true,
                 };
                 pd7 = new Product
@@ -106,7 +113,8 @@ namespace GestionDrivApi.Data
                     Nom = "CHARAL : Onglet moelleux",
                     Description = "A CONSERVER ENTRE 0°C ET + 4°C ET À CONSOMMER DANS LES 24 HEURES MAXIMUM APRÈS OUVERTURE.",
                     QuantityStock = 100,
-                    CategoryId = c7.Id,
+                    //CategoryId = c7.Id,
+                    Category = c7,
                     Disponible = true,
                 };
                 IEnumerable<Product> products = new List<Product>()
@@ -133,10 +141,10 @@ namespace GestionDrivApi.Data
                 u1, u2, u3, u4, u5, u6, u7
                 };
                 await context.AddRangeAsync(units);
-                await context.SaveChangesAsync();
 
 		    }
 
+            await context.SaveChangesAsync();
                
             if (!roleManager.Roles.Any())
             {

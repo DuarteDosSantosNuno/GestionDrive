@@ -24,50 +24,63 @@ namespace GestionDrivApi.Repositories
 
         public async Task<List<Product>> FindAll()
         {
-            List<Product> products = await _applicationContext.Products.ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                                    .Include(p => p.Category)
+                                    .Include(p => p.Category.Rayon)
+                                    .ToListAsync();
             return products;
         }
 
         public async Task<Product> FindById(int id)
         {
-            Product product = await _applicationContext.Products.SingleAsync(p => p.Id == id);
+            Product product = await _applicationContext.Products
+                            .Include(p => p.Category)
+                            .Include(p => p.Category.Rayon)
+                            .SingleAsync(p => p.Id == id);
             return product;
         }
 
         public async Task<List<Product>> FindByName(string name)
         {
-            List<Product> products = await _applicationContext.Products.Where(p => p.Nom == name).ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                                    .Where(p => p.Nom.Contains(name))
+                                    .Include(p => p.Category)
+                                    .Include(p => p.Category.Rayon)
+                                    .ToListAsync();
             return products;
         }
 
         public async Task<List<Product>> FindByCategory(int categoryId)
         {
-            List<Product> products = await _applicationContext.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                .Where(p => p.Category.Id == categoryId)
+                .Include(p => p.Category)
+                .Include(p => p.Category.Rayon)
+                .ToListAsync();
             return products;
         }
 
         public async Task<List<Product>> FindByAvailability(bool available)
         {
-            List<Product> products = await _applicationContext.Products.Where(p => p.Disponible == available).ToListAsync();
+            List<Product> products = await _applicationContext.Products
+                                    .Where(p => p.Disponible == available)
+                                    .Include(p => p.Category)
+                                    .Include(p => p.Category.Rayon)
+                                    .ToListAsync();
             return products;
         }
 
         public async Task<Product> CreateProduct(Product newProduct)
         {
-            Product product = new Product();
-            product.Id = newProduct.Id;
-            product.Nom = newProduct.Nom;
-            product.Description = newProduct.Description;
-            product.QuantityStock = newProduct.QuantityStock;
-            product.CategoryId = newProduct.CategoryId;
-            product.Disponible = newProduct.Disponible;
+            _applicationContext.ChangeTracker.Clear();
+            _applicationContext.Categories.Attach(newProduct.Category);
+            _applicationContext.Rayons.Attach(newProduct.Category.Rayon);
 
-            _applicationContext.Products.Add(product);
-            _applicationContext.SaveChanges();
+            await _applicationContext.Products.AddAsync(newProduct);
+            await _applicationContext.SaveChangesAsync();
 
-            return product;
+            return newProduct;
         }
-
 
         public async Task<Product> UpdateProduct(Product newProduct)
         {
@@ -77,10 +90,10 @@ namespace GestionDrivApi.Repositories
             product.Nom = newProduct.Nom;
             product.Description = newProduct.Description;
             product.QuantityStock = newProduct.QuantityStock;
-            product.CategoryId = newProduct.CategoryId;
+            product.Category = newProduct.Category;
             product.Disponible = newProduct.Disponible;
 
-            _applicationContext.SaveChanges();
+            await _applicationContext.SaveChangesAsync();
 
             return product;
         }
@@ -106,8 +119,8 @@ namespace GestionDrivApi.Repositories
 
                 if (!Directory.Exists(filePath))
                     Directory.CreateDirectory(filePath);            
-
-                string fileName = "Product"+idProduct+"."+file.FileName;
+          
+                string fileName = "Product"+idProduct+"."+ Path.GetFileNameWithoutExtension(file.FileName);
                 filePath = Path.Combine(filePath, $"{fileName}{Path.GetExtension(file.FileName)}");
                 using var stream = new FileStream(filePath, FileMode.OpenOrCreate);
                 await file.CopyToAsync(stream);

@@ -11,7 +11,7 @@ namespace GestionDrivApi.Entities
         public string Nom { get; set; }
         public string Description { get; set; }
         public double QuantityStock { get; set; }
-        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public bool Disponible { get; set; }
 
         public static implicit operator Product(List<Product> v)
