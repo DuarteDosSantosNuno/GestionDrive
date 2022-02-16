@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Authentification from "./pages/Authentification";
 import Footer from "./components/Footer";
 import tmpData from "./assets/tmpData";
+import FormPage from "./components/Login";
 //import Login from "./components/Login";
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
             <Route path="/" element={<Home productsList={products} />} />
             <Route path="/Order" element={<Order productsList={products} />} />
             <Route path="/Checkout" element={<Checkout />} />
-            {/* <Route path="/Login" element={<Login />} /> */}
+            <Route path="/FromPage" element={<FormPage />} />
             <Route path="/Authentification" element={<Authentification />} />
             <Route path="*" element={<NotFound />} />
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useFormik, onChange, handleSubmit } from 'formik';
+import Login from '../components/Login';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 
 const Authentification = () => (
     <div>
@@ -42,7 +44,7 @@ const Authentification = () => (
 
             {({ values, handleChange, handleSubmit, handleBlur, errors, touched, isSubmitting }) => (
                 <Form onSubmit={handleSubmit} className="bg-white border p-5 d-flex flex-column">
-                    {/* <Login /> */}
+                    <Login />
                     <div className="bg-white border p-5 d-flex flex-column">
                         <div className='form-group'>
                             <br></br>
