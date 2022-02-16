@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import * as MDB from "mdb-react-ui-kit";
 
 export default function UserCard(props) {

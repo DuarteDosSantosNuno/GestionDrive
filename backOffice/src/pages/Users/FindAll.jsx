@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import * as MDB from "mdb-react-ui-kit";
 import * as URL from "../../APIConfig";
-import UserCard from "../../components/Users/UserCard";
 
 export default function FindAll(props) {
   const [data, setData] = useState([]);

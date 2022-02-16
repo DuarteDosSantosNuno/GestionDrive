@@ -24,6 +24,10 @@ export default function Navbar(props) {
           Users
         </MDB.MDBNavbarBrand>
 
+        <MDB.MDBNavbarBrand href="/register" className="brand-main">
+          Register
+        </MDB.MDBNavbarBrand>
+
       </MDB.MDBContainer>
     </MDB.MDBNavbar>
   );

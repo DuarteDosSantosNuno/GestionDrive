@@ -18,6 +18,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Users" element={<Users />} />
+            <Route path="/register" />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
