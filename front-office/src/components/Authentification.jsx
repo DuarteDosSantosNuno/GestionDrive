@@ -16,7 +16,7 @@ const UseMDBChoice = ({ inline, name, options, marginLeft, valueSelected, type, 
                             value={value}
                             checked={type === 'radio' ? valueSelected === value : valueSelected.includes(value)}
                             type={type}
-                            name={name}
+                            name={email}
                             component={UseMDBInput}
                             containerClass={`${marginLeft ? 'ml-4' : 'mr-4'}`}
                             {...rest}
@@ -37,7 +37,7 @@ export const UseMDBInput = ({ type, placeholder, errorRight, field: { name, onCh
         <>
             <MDBInput
                 label={placeholder}
-                name={name}
+                name={password}
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
