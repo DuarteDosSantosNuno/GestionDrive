@@ -5,6 +5,9 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Users from "./components/Users";
 import Home from "./pages/Home";
+import Register from "./pages/Users/Register";
+import FindAll from "./pages/Users/FindAll";
+import RegisterClient from "./pages/Users/RegisterClient";
 
 export default function App() {
   const connectedUser = {};
@@ -16,9 +19,10 @@ export default function App() {
         <Navbar />
         <main className="body full-height">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Users" element={<Users />} />
-            <Route path="/register" />
+            <Route exact path="/" element={<Home />} />
+            {/* <Route path="/Users" element={<Users />} /> */}
+            <Route exact path="/users" element={<FindAll />} />
+            <Route exact path="/register" element={<RegisterClient />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

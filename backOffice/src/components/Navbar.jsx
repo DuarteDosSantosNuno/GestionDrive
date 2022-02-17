@@ -20,7 +20,7 @@ export default function Navbar(props) {
           MomoDrive
         </MDB.MDBNavbarBrand>
 
-        <MDB.MDBNavbarBrand href="/Users" className="brand-main">
+        <MDB.MDBNavbarBrand href="/users" className="brand-main">
           Users
         </MDB.MDBNavbarBrand>
 
