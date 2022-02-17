@@ -62,7 +62,12 @@ export default function App() {
         <Navbar nbCartItems={nbCartItems} />
         <main className="body gradient-custom-frontoffice full-height">
           <Routes>
-            <Route path="/" element={<Home onAdd={onAdd} />} />
+            <Route
+              path="/"
+              element={
+                <Home cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+              }
+            />
             <Route
               path="/Order"
               element={

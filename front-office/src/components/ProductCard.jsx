@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
   MDBCardImage,
   MDBCardFooter,
   MDBBtn,
@@ -11,15 +9,17 @@ import {
 import { BASE_IMAGE_URL } from "./../APIConfig";
 
 export default function ProductCard(props) {
-  const { product, onAdd } = props;
-  const [buttonQty, setButtonQty] = useState(product.qty ? false : true);
+  const { product, onAdd, onRemove } = props;
+  const [button, setButton] = useState(props.button);
 
-  useEffect(() => {
-    console.log("useEffect setButtonQty = " + buttonQty);
-    setButtonQty(product.qty > 0 ? true : false);
-  }, []);
+  //const [buttonQty, setButtonQty] = useState(product.qty ? false : true);
+
+  // useEffect(() => {
+  //   console.log("useEffect setButtonQty = " + buttonQty);
+  //   setButtonQty(product.qty > 0 ? true : false);
+  // }, []);
+
   let pathImage;
-
   if (product.productImages.length === 0) pathImage = "./tmp/img/noimage.png";
   else pathImage = BASE_IMAGE_URL + product.productImages[0].src;
 
@@ -37,34 +37,28 @@ export default function ProductCard(props) {
         />
       </div>
       <MDBCardBody>
-        <MDBCardTitle className="product-card-name">{product.nom}</MDBCardTitle>
+        <h5 className="product-card-name">{product.nom}</h5>
+      </MDBCardBody>
+      <MDBCardFooter>
         <p className="product-card-text">
           {product.units[0].prix} €/{product.units[0].unite}
         </p>
         <div className="d-flex align-items-center justify-content-center">
-          {!buttonQty ? (
-            <MDBBtn onClick={() => onAdd(product)}>{props.btn}</MDBBtn>
+          {!button ? (
+            <MDBBtn onClick={() => onAdd(product)}>Add to cart</MDBBtn>
           ) : (
-            <>
-              <button
-                type="button"
-                onClick={() => onRemove(product)}
-                className="btn btn-outline-danger btn-floating"
-              >
-                <i className="fas fa-minus"></i>{" "}
-              </button>
+            <div>
+              <a role="button" onClick={() => onRemove(product)}>
+                <i className="fas fa-minus productcardcart-button-remove"></i>{" "}
+              </a>
               <span>{product.qty}</span>
-              <button
-                type="button"
-                onClick={() => onAdd(product)}
-                className="btn btn-outline-success btn-floating"
-              >
-                <i className="fas fa-plus"></i>
-              </button>
-            </>
+              <a role="button" onClick={() => onAdd(product)}>
+                <i className="fas fa-plus productcardcart-button-add"></i>
+              </a>
+            </div>
           )}
         </div>
-      </MDBCardBody>
+      </MDBCardFooter>
     </MDBCard>
   );
 }

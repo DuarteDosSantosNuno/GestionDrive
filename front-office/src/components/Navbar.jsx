@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MDBNavbar,
   MDBContainer,
@@ -17,7 +17,7 @@ export default function Navbar(props) {
   const { nbCartItems } = props;
 
   return (
-    <MDBNavbar expand="md" sticky light bgColor="light">
+    <MDBNavbar expand="sm" sticky light bgColor="light">
       <MDBContainer fluid>
         <MDBNavbarToggler
           type="button"

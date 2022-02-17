@@ -4,14 +4,13 @@ import ProductCard from "../components/ProductCard";
 import { BASE_API_URL } from "./../APIConfig";
 
 export default function Home(props) {
-  const { onAdd } = props;
+  const { cartItems, onAdd, onRemove } = props;
   const [data, setData] = useState([]);
 
   function DisplayProducts() {
     useEffect(() => {
       getAllProducts();
     }, []);
-    console.log(data);
   }
 
   const getAllProducts = async () => {
@@ -24,6 +23,17 @@ export default function Home(props) {
     }
   };
 
+  let productQty = false;
+  function ProductInCart(product) {
+    const p = cartItems.find((i) => i.id === product.id);
+    if (!p) return product;
+    else {
+      productQty = true;
+      console.log("Qty > 0");
+      return p;
+    }
+  }
+
   return (
     <MDBContainer className="d-flex flex-column h-100">
       <h1>Products</h1>
@@ -33,9 +43,10 @@ export default function Home(props) {
           <MDBCol>
             <ProductCard
               key={p.id}
-              product={p}
-              btn={"Add to Cart"}
+              product={ProductInCart(p)}
+              button={productQty}
               onAdd={onAdd}
+              onRemove={onRemove}
             ></ProductCard>
           </MDBCol>
         ))}

@@ -17,18 +17,18 @@ export default function ProductCardCart(props) {
   else pathImage = BASE_IMAGE_URL + product.productImages[0].src;
 
   return (
-    <MDBCard style={{ maxWidth: "95%" }} className="product-card">
+    <MDBCard className="product-card">
       <MDBRow>
         <MDBCol className="col-2">
           <MDBCardImage
             src={pathImage}
             alt="..."
-            className="img-fluid p-2"
-            style={{ maxHeight: "4.5rem" }}
+            className=" p-2"
+            style={{ maxHeight: "4rem" }}
           />
         </MDBCol>
         <MDBCol className="col-6 d-flex align-items-center justify-content-left">
-          <MDBCardTitle>{product.nom}</MDBCardTitle>
+          <h5 className="product-card-name">{product.nom}</h5>
         </MDBCol>
         <MDBCol className="col-4 d-flex align-items-center justify-content-evenly">
           <a role="button" onClick={() => onRemove(product)}>

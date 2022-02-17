@@ -7,6 +7,10 @@ div .card-body {
   padding: 0.5rem 1rem;
 }
 
+div .card-footer {
+  padding: 0.5rem 1rem;
+}
+
 .card-image-border:hover {
   opacity: 0.65;
   cursor: pointer;

@@ -8,7 +8,6 @@ export default function Cart(props) {
     <>
       <div className="flex align-items-center">
         <h2>Order summary</h2>
-        <CartCard products={products} />
       </div>
     </>
   );
