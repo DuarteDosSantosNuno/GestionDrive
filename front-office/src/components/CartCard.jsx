@@ -27,9 +27,9 @@ export default function CartCard(props) {
         <MDBCardTitle>Order total</MDBCardTitle>
       </MDBCardHeader>
       <MDBCardBody>
-        <MDBCardText>
+        <div>
           {products.length === 0 ? (
-            <h3 className="p-4 text-warning">Empty cart</h3>
+            <h5 className="p-4 text-warning">Empty cart</h5>
           ) : (
             <div className="productcardcart-total">
               <ul>
@@ -44,7 +44,7 @@ export default function CartCard(props) {
               <h5 className="productcardcart-total">{TotalOrder(products)}€</h5>
             </div>
           )}
-        </MDBCardText>
+        </div>
       </MDBCardBody>
       <MDBCardFooter>
         <MDBBtn href="/Checkout">Proceed to checkout</MDBBtn>

@@ -78,7 +78,10 @@ export default function App() {
                 />
               }
             />
-            <Route path="/Checkout" element={<Checkout />} />
+            <Route
+              path="/Checkout"
+              element={<Checkout cartItems={cartItems} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

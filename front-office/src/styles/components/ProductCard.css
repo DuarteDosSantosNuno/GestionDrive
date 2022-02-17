@@ -11,14 +11,14 @@ div .card-footer {
   padding: 0.5rem 1rem;
 }
 
-.card-image-border:hover {
-  opacity: 0.65;
-  cursor: pointer;
-}
-
 .card-image {
   padding-top: 0.5rem;
   border-radius: 0.5rem;
+}
+
+.product-card_overlay {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .product-card-name {
@@ -27,19 +27,23 @@ div .card-footer {
   padding: 0;
 }
 
+.product-card_overlay:hover {
+  cursor: pointer;
+}
+
 .product-card-text {
   text-align: center;
   color: black;
   margin: 0;
 }
 
-/* .card-image-border {
+.product-card-qty {
+  text-align: center;
+  padding: 1rem;
+}
+
+.modal-footer {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  width: 10rem;
-  height: 10rem;
-  border: solid var(--color-1);
-  border-radius: 5rem;
-  opacity: 1;
-} */
+}
