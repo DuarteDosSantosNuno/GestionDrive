@@ -80,17 +80,20 @@ export default function Example(props) {
 
           const requestOptions = {
              method: 'POST',
-            //mode: 'cors',
-            headers: { 
+            // mode: 'no-cors',
+            headers: {
               //'Content-Type': 'application/json', 
+              //'Content-Type': 'text/plain', 
               // 'access-control-allow-origin': '*',
-              'Content-Type': 'application/x-www-form-urlencoded',
-              //'Accept': '*',
+              //'Content-Type': 'application/x-www-form-urlencoded',
+              //'Content-Type': 'multipart/form-data',
+              //'Content-Encoding': 'utf-8', 
+              'Accept': '*',
               //'Content-Type': 'application/*+json; charset=utf-8', 
-              'Accept': 'application/json',
+              //'Accept': 'application/json',
             },
             body: JSON.stringify(values, null, 2)
-      };
+          };
 
           await fetch(endpoint, requestOptions) // URL sur le serveur
                   .then(function (response) {
