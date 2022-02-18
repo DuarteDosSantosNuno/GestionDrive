@@ -1,61 +1,3 @@
-// import { useState, useEffect } from "react";
-// import * as MDB from "mdb-react-ui-kit";
-// import * as URL from "../../APIConfig";
-
-// export default function RegisterClient(props) {
-//   const [data, setData] = useState([]);
-
-//   // function DisplayUsers() {
-//   //   useEffect(() => {
-//   //       getAllUsers();        
-//   //     }, []);
-//   //     console.log(data);
-//   // }
-
-//   const newUser = async () => {
-//     const endpoint = URL.AUTHENTICATE + "register-client";
-
-//     const requestOptions = {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       //body: JSON.stringify({ title: 'React POST Request Example' })
-//       body: JSON.stringify()
-// };
-
-//     fetch(endpoint, requestOptions) // URL sur le serveur
-//             .then(function (response) {
-//                 console.log(response);
-//                 return response.json();
-//             })
-//             .then(
-//                 (result) => {
-//                     console.log(result);
-//                     setData(result);
-//                 },
-//                 (error) => {
-//                     console.log(error);
-//                 })
-//   };
-  
-//   return (
-//     <div>
-//         <h1>Sign Up</h1>
-
-//             <form method="post">
-//               <label htmlFor="email">Email</label>
-//               <input name="email" placeholder="jane@acme.com" type="email" /> <br/>
-              
-//               <label htmlFor="password">Password</label>
-//               <input name="password" type="password" /> <br/>
-    
-//               <button type="submit" onClick="newUser();">
-//                 Submit
-//               </button>
-//             </form>
-//       </div>
-//   );
-// }
-
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as URL from "../../APIConfig";
@@ -115,10 +57,10 @@ export default function Example(props) {
         {({ isSubmitting }) => (
           <Form>
             <label htmlFor="email">Email</label>
-            <Field name="email" placeholder="jane@acme.com" type="email" />
+            <Field name="email" placeholder="jane@acme.com" type="email" /> <br/>
 
             <label htmlFor="password">Password</label>
-            <Field name="password" type="password" />
+            <Field name="password" type="password" /> <br/>
 
             <button type="submit" disabled={isSubmitting}>
               Submit
