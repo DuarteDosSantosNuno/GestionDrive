@@ -4,14 +4,13 @@ import ProductCard from "../components/ProductCard";
 import { BASE_API_URL } from "./../APIConfig";
 
 export default function Home(props) {
-  const { onAdd } = props;
+  const { cartItems, onAdd, onRemove } = props;
   const [data, setData] = useState([]);
 
   function DisplayProducts() {
     useEffect(() => {
-        getAllProducts();        
-      }, []);
-      console.log(data);
+      getAllProducts();
+    }, []);
   }
 
   const getAllProducts = async () => {
@@ -23,19 +22,19 @@ export default function Home(props) {
       setData(responseJson);
     }
   };
-  
+
   return (
-    <MDBContainer d-flex flex-column h-100>
+    <MDBContainer className="d-flex flex-column h-100">
       <h1>Products</h1>
       {DisplayProducts()}
-      <MDBRow className="row-cols-1 row-cols-md-4 g-4">
+      <MDBRow className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {data.map((p) => (
-          <MDBCol>
+          <MDBCol key={p.id}>
             <ProductCard
-              key={p.id}
+              cartItems={cartItems}
               product={p}
-              btn={"Add to Cart"}
               onAdd={onAdd}
+              onRemove={onRemove}
             ></ProductCard>
           </MDBCol>
         ))}

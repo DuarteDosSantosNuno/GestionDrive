@@ -7,27 +7,44 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCardFooter,
+  MDBRow,
 } from "mdb-react-ui-kit";
 
 export default function CartCard(props) {
   const { products } = props;
+
+  function TotalOrder(products) {
+    const totalTmp = products.map(
+      (p) => parseInt(p.qty) * parseFloat(p.units[0].prix)
+    );
+    const total = totalTmp.reduce((prev, curr) => prev + curr, 0);
+    return total.toFixed(2);
+  }
+
   return (
     <MDBCard className="h-100">
       <MDBCardHeader>
-        <MDBCardTitle>Total</MDBCardTitle>
+        <MDBCardTitle>Order total</MDBCardTitle>
       </MDBCardHeader>
       <MDBCardBody>
-        <MDBCardText>
+        <div>
           {products.length === 0 ? (
-            <h3 className="p-4 text-warning">Empty cart</h3>
+            <h5 className="p-4 text-warning">Empty cart</h5>
           ) : (
-            <span>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem,
-              beatae! Ullam, exercitationem natus nesciunt aut reprehenderit
-              inventore. Dolorem, incidunt nostrum!
-            </span>
+            <div className="productcardcart-total">
+              <ul>
+                {products.map((p) => (
+                  <li key={p.id}>
+                    <span>
+                      {p.qty} x {p.units[0].prix}€
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <h5 className="productcardcart-total">{TotalOrder(products)}€</h5>
+            </div>
           )}
-        </MDBCardText>
+        </div>
       </MDBCardBody>
       <MDBCardFooter>
         <MDBBtn href="/Checkout">Proceed to checkout</MDBBtn>

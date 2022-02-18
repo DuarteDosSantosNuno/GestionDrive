@@ -1,10 +1,12 @@
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Modal from "../components/Modal";
 
-export default function Checkout() {
+export default function Checkout(props) {
+  const { cartItems } = props;
+
   return (
     <>
-      <MDBContainer d-flex flex-column>
+      <MDBContainer className="d-flex flex-column">
         <MDBRow>
           <MDBCol center>
             <h1>Pickup time</h1>

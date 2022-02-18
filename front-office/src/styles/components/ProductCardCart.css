@@ -1,0 +1,24 @@
+.productcardcart-button-add {
+  color: var(--color-2);
+}
+
+.productcardcart-button-remove {
+  color: var(--color-3);
+}
+
+.productcardcart-total {
+  padding-left: 1em;
+  width: fit-content;
+}
+
+.productcardcart-total h5 {
+  width: auto;
+}
+
+.productcardcart-total h5::before {
+  display: block;
+  content: "";
+  width: auto;
+  border-top: 0.1rem solid black;
+  transform: translateY(-0.5rem);
+}
