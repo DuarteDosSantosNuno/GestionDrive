@@ -5,8 +5,12 @@ import Order from "./pages/Order";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import Authentification from "./pages/Authentification";
 import Footer from "./components/Footer";
 //import tmpData from "./assets/tmpData";
+import Login from "./components/Login";
+
+
 
 export default function App() {
   //const { products } = tmpData;
@@ -62,31 +66,16 @@ export default function App() {
         <Navbar nbCartItems={nbCartItems} />
         <main className="body gradient-custom-frontoffice full-height">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Home cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
-              }
-            />
-            <Route
-              path="/Order"
-              element={
-                <Order
-                  cartItems={cartItems}
-                  onAdd={onAdd}
-                  onRemove={onRemove}
-                />
-              }
-            />
-            <Route
-              path="/Checkout"
-              element={<Checkout cartItems={cartItems} />}
-            />
+            <Route path="/" element={<Login />} />
+            <Route path="/Home" element={<Home cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />} />
+            <Route path="/Order" element={<Order cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />} />
+            <Route path="/Checkout" element={<Checkout cartItems={cartItems} />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-      </BrowserRouter>
+
+          </Routes >
+        </main >
+      </BrowserRouter >
       <Footer />
-    </div>
+    </div >
   );
 }
