@@ -12,6 +12,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import Navbar from "./pages/Navbar";
+import Login from "./pages/Users/Login";
 
 export default class App extends Component {
   render() {
@@ -24,6 +25,7 @@ export default class App extends Component {
               <Route exact path="/" element={<Home />} />
               {/* <Route path="/Users" element={<Users />} /> */}
               <Route exact path="/users" element={<FindAll />} />
+              <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<RegisterClient />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Navigate to="/accueil" />} />

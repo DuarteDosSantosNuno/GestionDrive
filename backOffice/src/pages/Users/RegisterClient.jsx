@@ -27,7 +27,7 @@ export default function Example(props) {
               //'Content-Type': 'application/json', 
               //'Content-Type': 'text/plain', 
               // 'access-control-allow-origin': '*',
-              //'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/x-www-form-urlencoded',
               //'Content-Type': 'multipart/form-data',
               //'Content-Encoding': 'utf-8', 
               'Accept': '*',

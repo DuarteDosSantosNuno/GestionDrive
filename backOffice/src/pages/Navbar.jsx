@@ -19,6 +19,9 @@ export default class Navbar extends Component {
           <NavLink className="nav-item text-info m-3" to="/users">
             Users
           </NavLink>
+          <NavLink className="nav-item text-info m-3" to="/login">
+            Login
+          </NavLink>
           <NavLink className="nav-item text-info m-3" to="/register">
             Register
           </NavLink>
