@@ -1,0 +1,29 @@
+
+
+.ProductsHeader{
+    height:20px;
+}
+
+.Title{
+    margin:10px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.Button{
+    width:60px;
+    height: 40px;
+    border:none;
+    border-radius: 5px;
+    margin-top:10px;
+    margin-left:20px;
+    font-size: 20px;
+}
+
+.ProductsList{
+    width:1052px;
+    min-height: 100px;
+    margin-top: 50px;
+    
+}
+
