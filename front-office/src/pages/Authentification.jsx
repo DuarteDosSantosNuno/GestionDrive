@@ -1,9 +1,12 @@
 import { Formik, ErrorMessage, Field, Form } from "formik";
+import { Component } from "react";
 import * as yup from 'yup';
 // import React, { useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import { MDBInput } from "mdbreact";
 import FormPage from "../components/Login";
+import App from "../App";
+import { Link } from 'react-router-dom';
 
 
 
@@ -70,6 +73,7 @@ export default class Authentification extends Component {
                                         onChange={handleChange}
                                         onBLur={handleBlur}
                                         value={values.email}
+                                    //   required={"erreur"}
                                     //  className=""
                                     />
                                     <ErrorMessage

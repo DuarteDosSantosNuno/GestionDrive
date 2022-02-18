@@ -20,12 +20,12 @@ export default function App() {
         <Navbar />
         <main className="body gradient-custom-frontoffice full-height">
           <Routes>
-            <Route path="/" element={<Home productsList={products} />} />
+            <Route path="/Home" element={<Home productsList={products} />} />
             <Route path="/Order" element={<Order productsList={products} />} />
             <Route path="/Checkout" element={<Checkout />} />
-            <Route path="/FormPage" element={<FormPage />} />
-            <Route path="/Authentification" element={<Authentification />} />
-            <Route path="/Login" element={<Login />} />
+            {/* <Route path="/FormPage" element={<FormPage />} /> */}
+            {/* <Route path="/Authentification" element={<Authentification />} /> */}
+            <Route path="/" element={<Login />} />
             <Route path="*" element={<NotFound />} />
 
           </Routes>
