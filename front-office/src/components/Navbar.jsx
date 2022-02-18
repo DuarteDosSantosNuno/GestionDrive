@@ -27,13 +27,13 @@ export default function Navbar(props) {
         >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
-        <MDBNavbarBrand href="/" className="brand-main">
+        <MDBNavbarBrand href="/Home" className="brand-main">
           MomoDrive
         </MDBNavbarBrand>
         <MDBCollapse navbar show={showNavNoTogglerThird}>
           <MDBNavbarNav className="mr-auto mb-0 mb-lg-0">
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="home" href="/">
+              <MDBNavbarLink active aria-current="Home" href="/Home">
                 Products
               </MDBNavbarLink>
             </MDBNavbarItem>
